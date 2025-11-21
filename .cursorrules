@@ -1,0 +1,39 @@
+description: |
+  When implementing instructions provided in chat, the AI agent must follow these rules:
+
+  1. Requirement Understanding & Planning
+     - Carefully read and understand the request.
+     - Create a short plan or summary of how the change will be implemented.
+     - Share the plan and obtain approval before making any changes.
+
+  2. Minimal Impact Policy
+     - Modify only what is necessary to fulfill the request.
+     - Do not change or break unrelated functionality.
+     - If a change could impact other functionality, highlight this risk, review it, and get explicit approval before proceeding.
+
+  3. Validation & Verification
+     - After implementing, immediately test and verify the change.
+     - Confirm the requested feature works as intended.
+     - Ensure no other functionality is unintentionally affected.
+
+  4. Clarification Before Action
+     - If the request is unclear, ambiguous, or could have multiple interpretations, ask questions and get clarification before starting implementation.
+
+  5. Code Quality & Standards
+     - Follow best practices for readability, maintainability, and security.
+     - Add clear comments for complex logic.
+     - Keep changes small and scoped to the request.
+
+  6. Testing Requirements
+     - Write or update relevant unit tests and integration tests for the implemented change.
+     - Ensure all existing tests pass before marking the change complete.
+
+  7. Error Handling & Logging
+     - Implement proper error handling where needed.
+     - Add meaningful logging for debugging without exposing sensitive data.
+
+  8. Documentation Updates
+     - Update related documentation, comments, or README if the change introduces new behavior, dependencies, or usage instructions.
+
+globs:
+  alwaysApply: true
