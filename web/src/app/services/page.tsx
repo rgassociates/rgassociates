@@ -98,10 +98,10 @@ export default function Services() {
                             <span className="text-sm font-semibold text-[#D4A646] uppercase tracking-wider">Our Expertise</span>
                         </div>
                         <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Comprehensive Legal Services
+                            Specialized Legal Expertise for Every Challenge
                         </h1>
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
-                            We offer a full spectrum of legal services designed to meet the diverse needs of our clients with precision, care, and proven results.
+                            Explore our specialized legal services: Civil Litigation, Criminal Defense, Corporate Law, Real Estate, and IP Protection. Expert solutions for complex problems.
                         </p>
                     </motion.div>
                 </div>

@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Criminal Defense Lawyers | RG Associates",
+    title: "Criminal Defense Lawyer in India | Bail & Trial Advocacy",
     description:
-        "Aggressive criminal defense representation. We handle bail matters, trials, appeals, and white-collar crimes with a commitment to protecting your liberty.",
+        "Top criminal defense attorneys in India. Expert legal representation for bail, white-collar crimes, cyber law, and appeals. Protect your rights with RG Associates.",
 };
 
 export default function CriminalDefensePage() {
@@ -29,7 +29,7 @@ export default function CriminalDefensePage() {
                             </span>
                         </div>
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Criminal Defense
+                            Criminal Defense Services
                         </h1>
                         <p className="text-lg leading-8 text-gray-300">
                             Protecting your rights and liberty with aggressive, strategic, and experienced legal representation.
@@ -45,7 +45,7 @@ export default function CriminalDefensePage() {
                         {/* Main Content */}
                         <div className="lg:col-span-2 space-y-8 text-gray-700 leading-relaxed">
                             <h2 className="text-3xl font-bold text-[#051427] font-serif">
-                                Unwavering Defense Against Criminal Charges
+                                Expert Criminal Defense Lawyers in India
                             </h2>
                             <p>
                                 Facing criminal charges is one of the most daunting experiences a person can go through. The consequences—loss of reputation, fines, and potential incarceration—are severe. At RG Associates, we provide a robust defense for individuals accused of crimes, ensuring that their constitutional rights are upheld at every stage of the legal process.
@@ -84,6 +84,27 @@ export default function CriminalDefensePage() {
                             <p>
                                 We believe that every client deserves a fair trial. Our attorneys meticulously examine police reports, witness statements, and forensic evidence to identify inconsistencies. We are committed to standing by your side, offering not just legal counsel, but the support and guidance you need during a challenging time.
                             </p>
+
+                            {/* FAQ Section */}
+                            <div className="mt-12 pt-12 border-t border-gray-200">
+                                <h3 className="text-2xl font-bold text-[#051427] font-serif mb-6">
+                                    Frequently Asked Questions
+                                </h3>
+                                <dl className="space-y-6">
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">What is the difference between Anticipatory Bail and Regular Bail?</dt>
+                                        <dd className="mt-2 text-gray-600">Anticipatory bail is sought before an arrest when a person anticipates being accused of a non-bailable offense. Regular bail is applied for after an arrest has been made.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">Do you handle cases in the Supreme Court?</dt>
+                                        <dd className="mt-2 text-gray-600">Yes, our senior advocates represent clients in the Supreme Court of India for appeals, SLPs (Special Leave Petitions), and writ petitions.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">What should I do if I am arrested?</dt>
+                                        <dd className="mt-2 text-gray-600">Remain calm and exercise your right to remain silent. Do not sign any statements without consulting a lawyer. Contact us immediately for legal assistance.</dd>
+                                    </div>
+                                </dl>
+                            </div>
                         </div>
 
                         {/* Sidebar */}

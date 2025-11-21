@@ -32,10 +32,10 @@ export default function Contact() {
                             <span className="text-sm font-semibold text-[#D4A646] uppercase tracking-wider">Get In Touch</span>
                         </div>
                         <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Contact Us
+                            Let’s Discuss Your Legal Strategy
                         </h1>
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
-                            Get in touch with our team for a consultation. We are here to assist you with your legal needs.
+                            Get expert legal advice today. Visit our office or book a video consultation. Responsive, confidential, and ready to help.
                         </p>
                     </motion.div>
                 </div>
@@ -147,8 +147,8 @@ export default function Contact() {
                                         type="submit"
                                         disabled={!agreed}
                                         className={`group w-full inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-base font-semibold shadow-xl transition-all duration-300 ${agreed
-                                                ? 'bg-[#D4A646] text-[#051427] hover:bg-[#E5B657] hover:shadow-2xl hover:scale-105'
-                                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                            ? 'bg-[#D4A646] text-[#051427] hover:bg-[#E5B657] hover:shadow-2xl hover:scale-105'
+                                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                             }`}
                                     >
                                         Send Message

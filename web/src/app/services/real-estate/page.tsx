@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Real Estate Lawyers | RG Associates",
+    title: "Real Estate Lawyers in India | Property Disputes & RERA",
     description:
-        "Expert legal guidance for real estate transactions and disputes. We handle property registration, due diligence, RERA matters, and landlord-tenant issues.",
+        "Expert real estate lawyers in India. Legal services for property registration, RERA compliance, landlord-tenant disputes, and due diligence.",
 };
 
 export default function RealEstatePage() {
@@ -29,7 +29,7 @@ export default function RealEstatePage() {
                             </span>
                         </div>
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Real Estate
+                            Real Estate Services
                         </h1>
                         <p className="text-lg leading-8 text-gray-300">
                             Navigating the complexities of property transactions and disputes with confidence.
@@ -84,6 +84,27 @@ export default function RealEstatePage() {
                             <p>
                                 Our deep understanding of local property laws and regulations allows us to identify potential issues before they become problems. We provide clear, practical advice to help you make informed decisions about your real estate investments.
                             </p>
+
+                            {/* FAQ Section */}
+                            <div className="mt-12 pt-12 border-t border-gray-200">
+                                <h3 className="text-2xl font-bold text-[#051427] font-serif mb-6">
+                                    Frequently Asked Questions
+                                </h3>
+                                <dl className="space-y-6">
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">Why is title verification important?</dt>
+                                        <dd className="mt-2 text-gray-600">Title verification confirms the seller's ownership and ensures there are no pending legal cases or mortgages on the property, protecting you from fraud.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">How can RERA help homebuyers?</dt>
+                                        <dd className="mt-2 text-gray-600">RERA provides a mechanism for speedy dispute resolution and ensures transparency in project timelines and approvals, protecting buyers from delays.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">What are the grounds for tenant eviction?</dt>
+                                        <dd className="mt-2 text-gray-600">Common grounds include non-payment of rent, subletting without permission, or using the property for illegal purposes. The specific laws vary by state.</dd>
+                                    </div>
+                                </dl>
+                            </div>
                         </div>
 
                         {/* Sidebar */}

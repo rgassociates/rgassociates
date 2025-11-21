@@ -2,10 +2,51 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Schema from "@/components/seo/Schema";
 
 export default function Home() {
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What types of cases do you handle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We are a full-service law firm specializing in Civil Litigation, Criminal Defense, Corporate Law, Family Disputes, and Intellectual Property rights. Our team is equipped to handle complex matters across various legal domains."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer online legal consultations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide secure video consultations for clients across India and abroad. This allows you to get expert legal advice from the comfort of your home or office."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you charge for your services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our fee structure is transparent and tailored to the specific needs of each case. We offer fixed fees for certain services and hourly rates for others. We discuss all costs upfront during the initial consultation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which courts do you practice in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our advocates represent clients in the Supreme Court of India, various High Courts, and District Courts across the country. We also handle matters in specialized tribunals and forums."
+        }
+      }
+    ]
+  };
+
   return (
     <div className="bg-white">
+      <Schema data={faqData} />
       {/* Hero Section - Modern Split Layout */}
       <section className="relative bg-gradient-to-br from-[#051427] via-[#0A1A2F] to-[#051427] overflow-hidden">
         {/* Background Pattern */}
@@ -31,13 +72,13 @@ export default function Home() {
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-sm font-semibold text-[#D4A646] uppercase tracking-wider">
-                  Leading Law Firm in India
+                  Best Law Firm in India
                 </span>
               </div>
 
               {/* Main Heading */}
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white font-serif leading-[1.1]">
-                Securing Your{" "}
+                Defending Your Rights, Protecting Your{" "}
                 <span className="text-[#D4A646] relative inline-block">
                   Future
                   <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#D4A646]/30" viewBox="0 0 200 12" preserveAspectRatio="none">
@@ -49,7 +90,7 @@ export default function Home() {
 
               {/* Subheading */}
               <p className="text-lg sm:text-xl leading-relaxed text-gray-300 max-w-xl">
-                RG Associates combines decades of legal expertise with a modern, client-focused approach. We deliver strategic solutions for complex legal challenges with integrity and precision.
+                India’s trusted legal partners for complex litigation, corporate advisory, and dispute resolution. We blend traditional legal wisdom with modern, aggressive strategies to deliver results.
               </p>
 
               {/* CTA Buttons */}
@@ -58,16 +99,16 @@ export default function Home() {
                   href="/contact"
                   className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#D4A646] px-8 py-4 text-base font-semibold text-[#051427] shadow-xl hover:bg-[#E5B657] hover:shadow-2xl hover:scale-105 transition-all duration-300"
                 >
-                  Schedule Consultation
+                  Schedule a Free Consultation
                   <svg className="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
-                  href="/attorneys"
+                  href="/services"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/20 px-8 py-4 text-base font-semibold text-white hover:bg-white/10 hover:border-[#D4A646] transition-all duration-300"
                 >
-                  Meet Our Attorneys
+                  View Our Practice Areas
                 </Link>
               </div>
 
@@ -81,8 +122,8 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="text-sm text-gray-400">
-                  <div className="font-semibold text-white">1,500+ Cases Won</div>
-                  <div>Trusted by clients across India</div>
+                  <div className="font-semibold text-white">95% Success Rate</div>
+                  <div>Trusted by 500+ clients across India</div>
                 </div>
               </div>
             </motion.div>
@@ -113,15 +154,15 @@ export default function Home() {
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
                       <div className="text-2xl font-bold text-[#051427] font-serif">20+</div>
-                      <div className="text-xs text-gray-600 uppercase tracking-wide">Years</div>
+                      <div className="text-xs text-gray-600 uppercase tracking-wide">Years Exp.</div>
                     </div>
                     <div className="border-x border-gray-200">
-                      <div className="text-2xl font-bold text-[#051427] font-serif">98%</div>
+                      <div className="text-2xl font-bold text-[#051427] font-serif">95%</div>
                       <div className="text-xs text-gray-600 uppercase tracking-wide">Success</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-[#051427] font-serif">1.5K+</div>
-                      <div className="text-xs text-gray-600 uppercase tracking-wide">Cases</div>
+                      <div className="text-2xl font-bold text-[#051427] font-serif">500+</div>
+                      <div className="text-xs text-gray-600 uppercase tracking-wide">Clients</div>
                     </div>
                   </div>
                 </div>
@@ -138,8 +179,6 @@ export default function Home() {
           </svg>
         </div>
       </section>
-
-      {/* Stats Section - Removed as stats are now in hero */}
 
       {/* Services Section - Modern Card Design */}
       <section className="relative bg-white py-24 sm:py-32">
@@ -299,7 +338,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-[#051427] font-serif">98%</div>
+                      <div className="text-2xl font-bold text-[#051427] font-serif">95%</div>
                       <div className="text-sm text-gray-600">Success Rate</div>
                     </div>
                   </div>
@@ -381,6 +420,44 @@ export default function Home() {
               </div>
             </motion.div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section - SEO Optimized */}
+      <section className="py-24 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
+            <h2 className="text-3xl font-bold tracking-tight text-[#051427] sm:text-4xl font-serif mb-10 text-center">
+              Frequently Asked Questions
+            </h2>
+            <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
+              {[
+                {
+                  question: "What types of cases do you handle?",
+                  answer: "We are a full-service law firm specializing in Civil Litigation, Criminal Defense, Corporate Law, Family Disputes, and Intellectual Property rights. Our team is equipped to handle complex matters across various legal domains."
+                },
+                {
+                  question: "Do you offer online legal consultations?",
+                  answer: "Yes, we provide secure video consultations for clients across India and abroad. This allows you to get expert legal advice from the comfort of your home or office."
+                },
+                {
+                  question: "How do you charge for your services?",
+                  answer: "Our fee structure is transparent and tailored to the specific needs of each case. We offer fixed fees for certain services and hourly rates for others. We discuss all costs upfront during the initial consultation."
+                },
+                {
+                  question: "Which courts do you practice in?",
+                  answer: "Our advocates represent clients in the Supreme Court of India, various High Courts, and District Courts across the country. We also handle matters in specialized tribunals and forums."
+                }
+              ].map((faq) => (
+                <div key={faq.question} className="pt-6">
+                  <dt>
+                    <h3 className="text-lg font-semibold leading-7 text-[#051427]">{faq.question}</h3>
+                  </dt>
+                  <dd className="mt-2 text-base leading-7 text-gray-600">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>

@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Corporate Law Services | RG Associates",
+    title: "Corporate Law Firm in India | M&A, Compliance & Contracts",
     description:
-        "Strategic corporate legal advisory. We assist with company formation, compliance, mergers & acquisitions, and contract drafting for businesses of all sizes.",
+        "Leading corporate law firm in India. Expert legal services for company registration, mergers & acquisitions, contract drafting, and regulatory compliance.",
 };
 
 export default function CorporateLawPage() {
@@ -29,7 +29,7 @@ export default function CorporateLawPage() {
                             </span>
                         </div>
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Corporate Law
+                            Corporate Law Services
                         </h1>
                         <p className="text-lg leading-8 text-gray-300">
                             Empowering businesses with strategic legal counsel, from incorporation to complex mergers.
@@ -84,6 +84,27 @@ export default function CorporateLawPage() {
                             <p>
                                 We understand the speed of business. Our attorneys are responsive, commercially aware, and dedicated to providing practical solutions. Whether you need ongoing general counsel or assistance with a specific high-stakes transaction, RG Associates delivers the expertise you need to succeed.
                             </p>
+
+                            {/* FAQ Section */}
+                            <div className="mt-12 pt-12 border-t border-gray-200">
+                                <h3 className="text-2xl font-bold text-[#051427] font-serif mb-6">
+                                    Frequently Asked Questions
+                                </h3>
+                                <dl className="space-y-6">
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">What legal structure is best for my startup?</dt>
+                                        <dd className="mt-2 text-gray-600">The ideal structure (LLP, Pvt Ltd, etc.) depends on your funding needs, liability concerns, and scalability. We can assess your business model to recommend the best fit.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">Why is due diligence important in M&A?</dt>
+                                        <dd className="mt-2 text-gray-600">Due diligence uncovers potential legal liabilities, financial risks, and compliance issues, ensuring you make an informed investment decision.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">Can you help with international business contracts?</dt>
+                                        <dd className="mt-2 text-gray-600">Yes, we have extensive experience in drafting and reviewing cross-border agreements, ensuring they comply with relevant international laws and protect your interests.</dd>
+                                    </div>
+                                </dl>
+                            </div>
                         </div>
 
                         {/* Sidebar */}

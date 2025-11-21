@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Intellectual Property Lawyers | RG Associates",
+    title: "Intellectual Property Lawyers in India | Trademark & Patent",
     description:
-        "Protect your innovation and brand. We offer expert legal services for trademarks, copyrights, patents, and IP infringement disputes.",
+        "Top IP law firm in India. Expert services for trademark registration, patent filing, copyright protection, and infringement litigation.",
 };
 
 export default function IntellectualPropertyPage() {
@@ -29,7 +29,7 @@ export default function IntellectualPropertyPage() {
                             </span>
                         </div>
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Intellectual Property
+                            Intellectual Property Services
                         </h1>
                         <p className="text-lg leading-8 text-gray-300">
                             Safeguarding your creative assets, brands, and inventions in a competitive marketplace.
@@ -84,6 +84,27 @@ export default function IntellectualPropertyPage() {
                             <p>
                                 We take a proactive approach to IP management. We don't just file forms; we help you build a robust IP strategy that aligns with your business goals. From startups protecting their first logo to established companies managing complex portfolios, we deliver tailored solutions to keep your innovations safe.
                             </p>
+
+                            {/* FAQ Section */}
+                            <div className="mt-12 pt-12 border-t border-gray-200">
+                                <h3 className="text-2xl font-bold text-[#051427] font-serif mb-6">
+                                    Frequently Asked Questions
+                                </h3>
+                                <dl className="space-y-6">
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">How long is a trademark valid in India?</dt>
+                                        <dd className="mt-2 text-gray-600">A registered trademark is valid for 10 years and can be renewed indefinitely every 10 years.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">What is the difference between copyright and trademark?</dt>
+                                        <dd className="mt-2 text-gray-600">Copyright protects original creative works (books, music, art), while a trademark protects brand identifiers (logos, names, slogans) used in commerce.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">Can I copyright my software?</dt>
+                                        <dd className="mt-2 text-gray-600">Yes, software code can be protected under copyright law as a "literary work." In some cases, unique algorithms may also be patentable.</dd>
+                                    </div>
+                                </dl>
+                            </div>
                         </div>
 
                         {/* Sidebar */}

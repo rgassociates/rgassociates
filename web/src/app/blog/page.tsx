@@ -1,7 +1,12 @@
-"use client";
-
+import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { motion } from "framer-motion";
+
+export const metadata: Metadata = {
+    title: "Legal Insights & Blog | RG Associates",
+    description:
+        "Stay updated with the latest legal trends, analysis, and news from RG Associates. Expert insights on corporate law, real estate, and more.",
+};
 
 const posts = [
     {
@@ -52,12 +57,7 @@ export default function Blog() {
                 </div>
 
                 <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="mx-auto max-w-2xl text-center"
-                    >
+                    <div className="mx-auto max-w-2xl text-center">
                         <div className="inline-flex items-center gap-2 rounded-full bg-[#D4A646]/10 px-4 py-2 ring-1 ring-inset ring-[#D4A646]/20 backdrop-blur-sm mb-6">
                             <svg className="h-4 w-4 text-[#D4A646]" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
@@ -71,7 +71,7 @@ export default function Blog() {
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
                             Stay informed with our expert analysis on the latest legal developments and trends.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Bottom Wave Separator */}
@@ -86,14 +86,10 @@ export default function Blog() {
             <section className="py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-                        {posts.map((post, index) => (
-                            <motion.article
+                        {posts.map((post) => (
+                            <article
                                 key={post.id}
                                 className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.6 }}
                             >
                                 {/* Image Section */}
                                 <div className="relative h-56 overflow-hidden">
@@ -158,7 +154,7 @@ export default function Blog() {
                                         </div>
                                     </div>
                                 </div>
-                            </motion.article>
+                            </article>
                         ))}
                     </div>
                 </div>

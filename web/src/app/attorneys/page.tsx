@@ -1,7 +1,12 @@
-"use client";
-
+import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { motion } from "framer-motion";
+
+export const metadata: Metadata = {
+    title: "Our Attorneys | RG Associates",
+    description:
+        "Meet the expert legal team at RG Associates. Our experienced attorneys specialize in civil litigation, criminal defense, corporate law, and more.",
+};
 
 const attorneys = [
     {
@@ -51,12 +56,7 @@ export default function Attorneys() {
                 </div>
 
                 <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="mx-auto max-w-2xl text-center"
-                    >
+                    <div className="mx-auto max-w-2xl text-center">
                         <div className="inline-flex items-center gap-2 rounded-full bg-[#D4A646]/10 px-4 py-2 ring-1 ring-inset ring-[#D4A646]/20 backdrop-blur-sm mb-6">
                             <svg className="h-4 w-4 text-[#D4A646]" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
@@ -69,7 +69,7 @@ export default function Attorneys() {
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
                             A team of dedicated legal professionals committed to excellence and your success.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Bottom Wave Separator */}
@@ -84,14 +84,10 @@ export default function Attorneys() {
             <section className="py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                        {attorneys.map((person, index) => (
-                            <motion.div
+                        {attorneys.map((person) => (
+                            <div
                                 key={person.id}
                                 className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.6 }}
                             >
                                 <div className="aspect-[3/4] w-full overflow-hidden bg-gray-200 relative">
                                     <img
@@ -117,7 +113,7 @@ export default function Attorneys() {
                                         </Link>
                                     </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>

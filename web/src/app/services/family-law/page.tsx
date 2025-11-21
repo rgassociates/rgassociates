@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Family Law Attorneys | RG Associates",
+    title: "Family Law Lawyers in India | Divorce & Child Custody",
     description:
-        "Compassionate family law services. We handle divorce, child custody, alimony, and inheritance matters with sensitivity and legal expertise.",
+        "Compassionate family law attorneys in India. Expert legal help for mutual divorce, contested divorce, child custody, alimony, and inheritance disputes.",
 };
 
 export default function FamilyLawPage() {
@@ -29,7 +29,7 @@ export default function FamilyLawPage() {
                             </span>
                         </div>
                         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Family Law
+                            Family Law Services
                         </h1>
                         <p className="text-lg leading-8 text-gray-300">
                             Navigating sensitive family matters with compassion, privacy, and expert legal guidance.
@@ -84,6 +84,27 @@ export default function FamilyLawPage() {
                             <p>
                                 We prioritize mediation and amicable settlements whenever possible to reduce emotional stress and legal costs. However, when litigation is necessary, we are fierce advocates for our clients in family courts. We handle every case with the utmost confidentiality and respect.
                             </p>
+
+                            {/* FAQ Section */}
+                            <div className="mt-12 pt-12 border-t border-gray-200">
+                                <h3 className="text-2xl font-bold text-[#051427] font-serif mb-6">
+                                    Frequently Asked Questions
+                                </h3>
+                                <dl className="space-y-6">
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">How long does a mutual consent divorce take?</dt>
+                                        <dd className="mt-2 text-gray-600">Typically, it takes 6-18 months, including a mandatory cooling-off period of 6 months, though this can sometimes be waived by the court.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">How is child custody decided in India?</dt>
+                                        <dd className="mt-2 text-gray-600">The court's primary consideration is the "welfare of the child." Factors include the child's age, emotional bond with parents, and the financial stability of each parent.</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="font-semibold text-[#051427]">Can I claim maintenance if I am working?</dt>
+                                        <dd className="mt-2 text-gray-600">Yes, employment does not automatically disqualify a spouse from claiming maintenance. The court considers the standard of living and the income of both parties.</dd>
+                                    </div>
+                                </dl>
+                            </div>
                         </div>
 
                         {/* Sidebar */}

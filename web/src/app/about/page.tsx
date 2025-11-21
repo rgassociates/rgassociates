@@ -29,10 +29,10 @@ export default function About() {
                             <span className="text-sm font-semibold text-[#D4A646] uppercase tracking-wider">Who We Are</span>
                         </div>
                         <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            About RG Associates
+                            A Legacy of Integrity, A Future of Justice
                         </h1>
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
-                            Founded on the principles of integrity, excellence, and dedication, RG Associates has been serving clients across India with distinction for over two decades.
+                            Founded on the principles of integrity and diligence, RG Associates has evolved from a boutique practice into a multidisciplinary powerhouse. We believe that justice should be accessible, transparent, and swift.
                         </p>
                     </motion.div>
                 </div>
@@ -62,7 +62,7 @@ export default function About() {
                             Justice, Integrity, and Results
                         </h2>
                         <p className="text-lg leading-8 text-gray-600">
-                            We believe that every client deserves a zealous advocate. Our team approaches every case with a commitment to ethical practice and a focus on achieving the best possible outcome.
+                            To empower our clients with clear, actionable legal guidance and to advocate fearlessly for their rights in every forum.
                         </p>
                     </motion.div>
 
