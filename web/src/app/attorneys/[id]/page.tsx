@@ -54,7 +54,7 @@ export default async function AttorneyProfile({ params }: { params: Promise<{ id
                         <div className="mt-8">
                             <h3 className="text-lg font-semibold leading-8 text-gray-900">Contact</h3>
                             <p className="text-base leading-7 text-gray-600">
-                                <a href="mailto:contact@rgassociates.com" className="hover:text-primary-600">contact@rgassociates.com</a>
+                                <a href="mailto:rgassociatesjaipur@gmail.com" className="hover:text-primary-600">rgassociatesjaipur@gmail.com</a>
                             </p>
                         </div>
                     </div>

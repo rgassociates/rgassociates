@@ -3,6 +3,9 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
+import DisclaimerModal from "@/components/DisclaimerModal";
+import WhatsAppButton from "@/components/WhatsAppButton";
+
 export const metadata: Metadata = {
   title: "RG Associates | Expert Legal Counsel in India",
   description:
@@ -17,6 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen">
+        <DisclaimerModal />
+        <WhatsAppButton />
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

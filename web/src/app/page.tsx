@@ -72,7 +72,7 @@ export default function Home() {
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-sm font-semibold text-[#D4A646] uppercase tracking-wider">
-                  Best Law Firm in India
+                  Leading Law Firm in Jaipur
                 </span>
               </div>
 
@@ -113,14 +113,7 @@ export default function Home() {
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex items-center gap-8 pt-8 border-t border-white/10">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D4A646] to-[#B8923E] ring-2 ring-[#051427] flex items-center justify-center text-white text-xs font-bold">
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
+              <div className="pt-8 border-t border-white/10">
                 <div className="text-sm text-gray-400">
                   <div className="font-semibold text-white">95% Success Rate</div>
                   <div>Trusted by 500+ clients across India</div>
@@ -142,7 +135,7 @@ export default function Home() {
               {/* Main Image Card */}
               <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                 <img
-                  src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                  src="/hero-banner-v2.png"
                   alt="Professional legal consultation - RG Associates law firm"
                   className="h-full w-full object-cover"
                 />

@@ -62,10 +62,9 @@ const Footer = () => {
                             <div>
                                 <h3 className="text-sm font-semibold leading-6 text-accent">Contact</h3>
                                 <ul role="list" className="mt-6 space-y-4 text-sm leading-6 text-gray-400">
-                                    <li>[Address Line 1]</li>
-                                    <li>[City, State, Zip]</li>
-                                    <li><a href="tel:+911234567890" className="hover:text-white">+91-1234567890</a></li>
-                                    <li><a href="mailto:contact@rgassociates.com" className="hover:text-white">contact@rgassociates.com</a></li>
+                                    <li>Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar, Jaipur, Rajasthan 302033</li>
+                                    <li><a href="tel:09309212401" className="hover:text-white">093092 12401</a></li>
+                                    <li><a href="mailto:rgassociatesjaipur@gmail.com" className="hover:text-white">rgassociatesjaipur@gmail.com</a></li>
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
@@ -77,8 +76,8 @@ const Footer = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/disclaimer" className="text-sm leading-6 text-gray-400 hover:text-white transition-colors">
-                                            Disclaimer
+                                        <Link href="/terms-of-use" className="text-sm leading-6 text-gray-400 hover:text-white transition-colors">
+                                            Terms of Use
                                         </Link>
                                     </li>
                                 </ul>

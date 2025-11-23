@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { submitContactForm } from './actions';
 
 export default function Contact() {
     const [agreed, setAgreed] = useState(false);
@@ -64,7 +65,16 @@ export default function Contact() {
                             <p className="text-gray-600 mb-8">
                                 Fill out the form below and we will get back to you as soon as possible.
                             </p>
-                            <form action="#" method="POST">
+                            <form action={async (formData) => {
+                                const result = await submitContactForm(formData);
+                                if (result.error) {
+                                    alert(result.error);
+                                } else {
+                                    alert(result.success);
+                                    // Optional: Reset form logic here if needed, though standard form submission might refresh or you can use a ref to reset.
+                                    // For a better UX, we could use state to show a success message inline instead of an alert.
+                                }
+                            }}>
                                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                     <div>
                                         <label htmlFor="first-name" className="block text-sm font-semibold leading-6 text-[#051427] mb-2">
@@ -75,6 +85,7 @@ export default function Contact() {
                                             name="first-name"
                                             id="first-name"
                                             autoComplete="given-name"
+                                            required
                                             className="block w-full rounded-lg border-0 px-4 py-3 text-[#051427] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D4A646] sm:text-sm sm:leading-6 bg-white transition-all"
                                         />
                                     </div>
@@ -87,6 +98,7 @@ export default function Contact() {
                                             name="last-name"
                                             id="last-name"
                                             autoComplete="family-name"
+                                            required
                                             className="block w-full rounded-lg border-0 px-4 py-3 text-[#051427] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D4A646] sm:text-sm sm:leading-6 bg-white transition-all"
                                         />
                                     </div>
@@ -99,6 +111,7 @@ export default function Contact() {
                                             name="email"
                                             id="email"
                                             autoComplete="email"
+                                            required
                                             className="block w-full rounded-lg border-0 px-4 py-3 text-[#051427] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D4A646] sm:text-sm sm:leading-6 bg-white transition-all"
                                         />
                                     </div>
@@ -122,6 +135,7 @@ export default function Contact() {
                                             name="message"
                                             id="message"
                                             rows={4}
+                                            required
                                             className="block w-full rounded-lg border-0 px-4 py-3 text-[#051427] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D4A646] sm:text-sm sm:leading-6 bg-white transition-all"
                                             defaultValue={''}
                                         />
@@ -185,7 +199,7 @@ export default function Contact() {
                                             </svg>
                                         ),
                                         title: 'Address',
-                                        content: '[Address Line 1]\n[City, State, Zip]'
+                                        content: 'Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar, Jaipur, Rajasthan 302033'
                                     },
                                     {
                                         icon: (
@@ -194,8 +208,8 @@ export default function Contact() {
                                             </svg>
                                         ),
                                         title: 'Phone',
-                                        content: '+91-1234567890',
-                                        link: 'tel:+91-1234567890'
+                                        content: '093092 12401',
+                                        link: 'tel:09309212401'
                                     },
                                     {
                                         icon: (
@@ -204,8 +218,8 @@ export default function Contact() {
                                             </svg>
                                         ),
                                         title: 'Email',
-                                        content: 'contact@rgassociates.com',
-                                        link: 'mailto:contact@rgassociates.com'
+                                        content: 'rgassociatesjaipur@gmail.com',
+                                        link: 'mailto:rgassociatesjaipur@gmail.com'
                                     },
                                 ].map((item, index) => (
                                     <motion.div
@@ -236,13 +250,21 @@ export default function Contact() {
                             </div>
 
                             {/* Map Placeholder */}
-                            <div className="mt-10 h-80 w-full bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl flex items-center justify-center text-gray-400 border border-gray-200 shadow-inner overflow-hidden">
-                                <div className="text-center">
-                                    <svg className="h-16 w-16 mx-auto mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                    </svg>
-                                    <p className="font-medium">Map Integration Placeholder</p>
-                                </div>
+                            <div className="mt-10 h-80 w-full bg-gray-100 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.034292335061!2d75.8361099!3d26.807036699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396dc9e74923d0e1%3A0x71b4494529b23414!2sNOTARY%20PUBLIC%20RAJESH%20GUPTA!5e0!3m2!1sen!2sin!4v1763910321577!5m2!1sen!2sin"
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    allowFullScreen={true}
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="RG Associates Location"
+                                ></iframe>
+                            </div>
+                            <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                                <h4 className="text-sm font-semibold text-[#051427] mb-1">Office Hours</h4>
+                                <p className="text-sm text-gray-600">Morning 10AM to 8PM</p>
                             </div>
                         </motion.div>
                     </div>
