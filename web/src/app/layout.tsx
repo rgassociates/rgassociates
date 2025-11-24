@@ -7,7 +7,7 @@ import DisclaimerModal from "@/components/DisclaimerModal";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "RG Associates | Expert Legal Counsel in India",
+  title: "RG Associates | Expert legal counsel in Jaipur",
   description:
     "RG Associates provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
 };
