@@ -525,7 +525,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-sm font-semibold text-white mb-1">Call Us</div>
-                  <div className="text-sm text-gray-400">+91 (XXX) XXX-XXXX</div>
+                  <div className="text-sm text-gray-400"><a href="tel:09309212401" className="hover:text-[#D4A646] transition-colors">093092 12401</a></div>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="h-12 w-12 rounded-full bg-[#D4A646]/10 flex items-center justify-center mb-4">
@@ -534,7 +534,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-sm font-semibold text-white mb-1">Email Us</div>
-                  <div className="text-sm text-gray-400">info@rgassociates.com</div>
+                  <div className="text-sm text-gray-400"><a href="mailto:rgassociatesjaipur@gmail.com" className="hover:text-[#D4A646] transition-colors">rgassociatesjaipur@gmail.com</a></div>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="h-12 w-12 rounded-full bg-[#D4A646]/10 flex items-center justify-center mb-4">
@@ -544,7 +544,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-sm font-semibold text-white mb-1">Visit Us</div>
-                  <div className="text-sm text-gray-400">New Delhi, India</div>
+                  <div className="text-sm text-gray-400">Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar, Jaipur, Rajasthan 302033</div>
                 </div>
               </div>
             </div>
