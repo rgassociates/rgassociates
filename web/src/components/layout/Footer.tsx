@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { serviceCategories } from '@/data/serviceCategories';
 
 const Footer = () => {
     return (
@@ -34,24 +35,40 @@ const Footer = () => {
                     <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                         <div className="md:grid md:grid-cols-2 md:gap-8">
                             <div>
-                                <h3 className="text-sm font-semibold leading-6 text-accent">Practice Areas</h3>
+                                <h3 className="text-sm font-semibold leading-6 text-accent">Our Services</h3>
                                 <ul role="list" className="mt-6 space-y-4">
-                                    {['Civil Litigation', 'Criminal Defense', 'Corporate Law', 'Family Law'].map((item) => (
-                                        <li key={item}>
-                                            <Link href={`/services/${item.toLowerCase().replace(' ', '-')}`} className="text-sm leading-6 text-gray-400 hover:text-white transition-colors">
-                                                {item}
+                                    {serviceCategories.map((category) => (
+                                        <li key={category.id}>
+                                            <Link
+                                                href={`/services/${category.slug}`}
+                                                className="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            >
+                                                {category.title}
                                             </Link>
                                         </li>
                                     ))}
+                                    <li>
+                                        <Link
+                                            href="/services"
+                                            className="text-sm leading-6 text-accent hover:text-white transition-colors font-semibold"
+                                        >
+                                            View All Services →
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
                                 <h3 className="text-sm font-semibold leading-6 text-accent">Company</h3>
                                 <ul role="list" className="mt-6 space-y-4">
-                                    {['About Us', 'Our Attorneys', 'Insights', 'Contact'].map((item) => (
-                                        <li key={item}>
-                                            <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="text-sm leading-6 text-gray-400 hover:text-white transition-colors">
-                                                {item}
+                                    {[
+                                        { name: 'About Us', href: '/about' },
+                                        { name: 'Our Attorneys', href: '/attorneys' },
+                                        { name: 'Insights', href: '/blog' },
+                                        { name: 'Contact', href: '/contact' }
+                                    ].map((item) => (
+                                        <li key={item.name}>
+                                            <Link href={item.href} className="text-sm leading-6 text-gray-400 hover:text-white transition-colors">
+                                                {item.name}
                                             </Link>
                                         </li>
                                     ))}

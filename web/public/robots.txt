@@ -1,0 +1,11 @@
+# Disallow all search engines from crawling the site
+# Website content is under development and not ready for indexing
+
+User-agent: *
+Disallow: /
+
+# Sitemap location (for future reference when ready to allow crawling)
+# Sitemap: https://www.rgassociates.com/sitemap.xml
+
+# Note: When ready to allow crawling, change "Disallow: /" to "Allow: /"
+# and uncomment the Sitemap line

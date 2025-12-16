@@ -1,12 +1,13 @@
 'use server';
 
-import { supabase } from '@/lib/supabase';
+import { createServerSupabaseClient } from '@/lib/supabaseServer';
 
 export async function submitContactForm(formData: FormData) {
     const firstName = formData.get('first-name') as string;
     const lastName = formData.get('last-name') as string;
     const email = formData.get('email') as string;
     const phone = formData.get('phone-number') as string;
+    const serviceType = formData.get('service-type') as string;
     const message = formData.get('message') as string;
 
     if (!firstName || !lastName || !email || !message) {
@@ -14,11 +15,14 @@ export async function submitContactForm(formData: FormData) {
     }
 
     try {
+        const supabase = createServerSupabaseClient();
+
         const { error } = await supabase.from('contact_submissions').insert({
             first_name: firstName,
             last_name: lastName,
             email,
             phone,
+            service_type: serviceType || null,
             message,
         });
 
