@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy | RG Associates',
-    description: 'Privacy Policy for RG Associates. Learn how we collect, use, and protect your information.',
+    title: 'Privacy Policy | RG Legal Solutions',
+    description: 'Privacy Policy for RG Legal Solutions. Learn how we collect, use, and protect your information.',
 };
 
 export default function PrivacyPolicy() {
@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
                         <strong>Last Updated:</strong> {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
                     </p>
                     <p>
-                        At RG Associates ("we," "us," or "our"), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or engage our legal services.
+                        At RG Legal Solutions ("we," "us," or "our"), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or engage our legal services.
                     </p>
 
                     <h2 className="text-2xl font-bold tracking-tight text-[#051427] mt-8 mb-4">1. Information We Collect</h2>
@@ -80,7 +80,7 @@ export default function PrivacyPolicy() {
                         If you have any questions or concerns about this Privacy Policy, please contact us at:
                     </p>
                     <p className="mt-2">
-                        <strong>RG Associates</strong><br />
+                        <strong>RG Legal Solutions</strong><br />
                         Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar, Jaipur, Rajasthan 302033<br />
                         Email: <a href="mailto:rgassociatesjaipur@gmail.com" className="text-[#D4A646] hover:underline">rgassociatesjaipur@gmail.com</a><br />
                         Phone: <a href="tel:09309212401" className="text-[#D4A646] hover:underline">093092 12401</a>

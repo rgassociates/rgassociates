@@ -36,13 +36,15 @@ const Header = () => {
             <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3 group">
-                        {/* Logo Icon */}
-                        <div className="h-10 w-10 rounded bg-accent flex items-center justify-center text-primary-900 font-serif font-bold text-xl">
-                            RG
-                        </div>
+                        {/* Logo Image */}
+                        <img
+                            src="/RGlogowithoutbg.webp"
+                            alt="RG Legal Solutions Logo"
+                            className="h-12 w-12 object-contain"
+                        />
                         <div className="flex flex-col">
-                            <span className="text-xl font-serif font-bold text-white tracking-wide group-hover:text-accent transition-colors">RG Associates</span>
-                            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Legal Counsel</span>
+                            <span className="text-xl font-serif font-bold text-white tracking-wide group-hover:text-accent transition-colors">RG Legal Solutions</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Expert Legal Services</span>
                         </div>
                     </Link>
                 </div>

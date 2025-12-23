@@ -3,7 +3,7 @@ import { serviceCategories } from '@/data/serviceCategories';
 import { allSubServices } from '@/data/subServices';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://www.rgassociates.com';
+    const baseUrl = 'https://www.rglegalsolutions.in';
 
     // Homepage
     const homepage = {

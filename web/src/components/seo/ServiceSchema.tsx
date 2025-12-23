@@ -15,7 +15,7 @@ export default function ServiceSchema({ service, categoryTitle, categorySlug }: 
         "description": service.description,
         "provider": {
             "@type": "LegalService",
-            "name": "RG Associates",
+            "name": "RG Legal Solutions",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar",
@@ -26,7 +26,7 @@ export default function ServiceSchema({ service, categoryTitle, categorySlug }: 
             },
             "telephone": "+91-9309212401",
             "email": "rgassociatesjaipur@gmail.com",
-            "url": "https://rgassociates.com"
+            "url": "https://rglegalsolutions.in"
         },
         "serviceType": categoryTitle,
         "areaServed": {
@@ -39,7 +39,7 @@ export default function ServiceSchema({ service, categoryTitle, categorySlug }: 
             "priceCurrency": "INR",
             "description": service.content.pricing.note
         } : undefined,
-        "url": `https://rgassociates.com/services/${categorySlug}/${service.slug}`
+        "url": `https://rglegalsolutions.in/services/${categorySlug}/${service.slug}`
     };
 
     // Add FAQ schema if FAQs exist
@@ -65,25 +65,25 @@ export default function ServiceSchema({ service, categoryTitle, categorySlug }: 
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://rgassociates.com"
+                "item": "https://rglegalsolutions.in"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Services",
-                "item": "https://rgassociates.com/services"
+                "item": "https://rglegalsolutions.in/services"
             },
             {
                 "@type": "ListItem",
                 "position": 3,
                 "name": categoryTitle,
-                "item": `https://rgassociates.com/services/${categorySlug}`
+                "item": `https://rglegalsolutions.in/services/${categorySlug}`
             },
             {
                 "@type": "ListItem",
                 "position": 4,
                 "name": service.title,
-                "item": `https://rgassociates.com/services/${categorySlug}/${service.slug}`
+                "item": `https://rglegalsolutions.in/services/${categorySlug}/${service.slug}`
             }
         ]
     };

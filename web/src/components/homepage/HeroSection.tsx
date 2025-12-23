@@ -111,12 +111,12 @@ export default function HeroSection() {
                         >
                             <span className="text-white font-semibold">Online Legal Services</span> for clients across India
                             <br />
-                            <span className="text-white font-semibold">Court Representation</span> in Jaipur jurisdiction
+                            <span className="text-white font-semibold">Other Legal Services</span> in Jaipur jurisdiction
                         </motion.p>
 
-                        {/* Key Services - All 5 Categories (Clickable) */}
+                        {/* Key Services - All 6 Categories (Clickable) */}
                         <motion.div
-                            className="grid grid-cols-2 gap-2 mb-6"
+                            className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
@@ -149,11 +149,18 @@ export default function HeroSection() {
                                 <span className="text-sm font-medium">Legal Research</span>
                             </a>
 
-                            <a href="/services/title-search-report" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group col-span-2">
+                            <a href="/services/title-search-report" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
                                 <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                 </svg>
                                 <span className="text-sm font-medium">Title Search & Due Diligence</span>
+                            </a>
+
+                            <a href="/services/document-registration" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
+                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span className="text-sm font-medium">Document Registration (Jaipur)</span>
                             </a>
                         </motion.div>
 

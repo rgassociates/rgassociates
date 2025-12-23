@@ -1,4 +1,4 @@
-// Design System Tokens for RG Associates
+// Design System Tokens for RG Legal Solutions
 // Professional Legal Firm Theme
 
 export const colors = {

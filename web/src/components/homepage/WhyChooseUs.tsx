@@ -24,7 +24,7 @@ export default function WhyChooseUs() {
                     transition={{ duration: 0.8 }}
                 >
                     <Badge variant="secondary" size="md" className="mb-6">
-                        Why RG Associates
+                        Why RG Legal Solutions
                     </Badge>
                     <h2 className="text-5xl font-bold tracking-tight text-[#051427] sm:text-6xl font-serif mb-6 bg-gradient-to-r from-[#051427] via-[#051427] to-[#D4A646] bg-clip-text">
                         Your Trusted Legal Partner

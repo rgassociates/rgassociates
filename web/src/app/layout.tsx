@@ -7,9 +7,9 @@ import DisclaimerModal from "@/components/DisclaimerModal";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "RG Associates | Expert legal counsel in Jaipur",
+  title: "RG Legal Solutions | Expert legal counsel in Jaipur",
   description:
-    "RG Associates provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
+    "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
 };
 
 export default function RootLayout({
@@ -19,7 +19,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TVL5Z4XP');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
+      </head>
       <body className="antialiased flex flex-col min-h-screen">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TVL5Z4XP"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <DisclaimerModal />
         <WhatsAppButton />
         <Header />
@@ -30,24 +53,66 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LawFirm",
-              name: "RG Associates",
-              url: "https://www.rgassociates.com",
-              logo: "https://www.rgassociates.com/logo.png",
+              "@type": "LegalService",
+              "@id": "https://www.rglegalsolutions.in/#organization",
+              name: "RG Legal Solutions",
+              alternateName: "RG Legal Solutions - Law Firm Jaipur",
+              url: "https://www.rglegalsolutions.in",
+              logo: "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
+              image: "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
+              description: "Leading law firm in Jaipur offering expert legal services across civil, criminal, and corporate law. Professional legal consultation, litigation, documentation, and research services.",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "[Address Line 1]",
-                addressLocality: "[City]",
-                addressRegion: "[State]",
-                postalCode: "[Zip Code]",
+                streetAddress: "Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar",
+                addressLocality: "Jaipur",
+                addressRegion: "Rajasthan",
+                postalCode: "302033",
                 addressCountry: "IN",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: "26.807037",
+                longitude: "75.836110",
               },
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "[Phone Number]",
+                telephone: "+919309212401",
                 contactType: "customer service",
+                email: "rgassociatesjaipur@gmail.com",
+                areaServed: "IN",
+                availableLanguage: ["English", "Hindi"],
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                opens: "10:00",
+                closes: "20:00",
               },
               priceRange: "$$",
+              areaServed: [
+                {
+                  "@type": "City",
+                  name: "Jaipur",
+                },
+                {
+                  "@type": "State",
+                  name: "Rajasthan",
+                },
+                {
+                  "@type": "Country",
+                  name: "India",
+                },
+              ],
+              knowsAbout: [
+                "Civil Law",
+                "Criminal Law",
+                "Corporate Law",
+                "Property Law",
+                "Family Law",
+                "Legal Consultation",
+                "Litigation",
+                "Legal Documentation",
+              ],
             }),
           }}
         />

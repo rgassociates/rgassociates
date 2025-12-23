@@ -1055,6 +1055,7 @@ export const litigationServices: SubService[] = [
 // Import additional service categories
 import { legalResearchServices } from "./legalResearchServices";
 import { titleSearchServices } from "./titleSearchServices";
+import { documentRegistrationServices } from "./documentRegistrationServices";
 
 // COMBINED EXPORT - All sub-services in one array
 export const allSubServices: SubService[] = [
@@ -1062,7 +1063,8 @@ export const allSubServices: SubService[] = [
     ...legalNoticeServices,
     ...litigationServices,
     ...legalResearchServices,
-    ...titleSearchServices
+    ...titleSearchServices,
+    ...documentRegistrationServices
 ];
 
 // Helper functions
@@ -1076,7 +1078,8 @@ export const getSubServiceBySlug = (categorySlug: string, serviceSlug: string): 
         'legal-notice': 'legal-notice',
         'litigation': 'litigation',
         'legal-research': 'legal-research',
-        'title-search-report': 'title-search-report'
+        'title-search-report': 'title-search-report',
+        'document-registration': 'document-registration'
     };
 
     const categoryId = categoryIdMap[categorySlug];

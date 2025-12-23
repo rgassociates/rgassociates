@@ -60,19 +60,19 @@ export default function DisclaimerModal() {
                                 </p>
                                 <ul className="list-disc pl-5 space-y-2">
                                     <li>
-                                        You are accessing this website of your own accord and there has been no form of solicitation, advertisement, or inducement by RG Associates or any of its members.
+                                        You are accessing this website of your own accord and there has been no form of solicitation, advertisement, or inducement by RG Legal Solutions or any of its members.
                                     </li>
                                     <li>
-                                        The purpose of this website is purely informational, intended to provide general details about RG Associates, its practice areas, and professional activities.
+                                        The purpose of this website is purely informational, intended to provide general details about RG Legal Solutions, its practice areas, and professional activities.
                                     </li>
                                     <li>
                                         Nothing on this website constitutes legal advice, nor does accessing or using the site create any lawyer–client relationship.
                                     </li>
                                     <li>
-                                        RG Associates assumes no liability for actions taken based on the information provided on this website.
+                                        RG Legal Solutions assumes no liability for actions taken based on the information provided on this website.
                                     </li>
                                     <li>
-                                        All content on this site is the intellectual property of RG Associates.
+                                        All content on this site is the intellectual property of RG Legal Solutions.
                                     </li>
                                 </ul>
                                 <p className="font-medium text-red-600 pt-2">

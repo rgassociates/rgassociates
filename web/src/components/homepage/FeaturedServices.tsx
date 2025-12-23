@@ -13,7 +13,7 @@ export default function FeaturedServices() {
         description: category.shortDescription,
         slug: category.slug,
         serviceCount: category.subServices.length,
-        availability: category.id === "litigation" ? "Jaipur Only" : "Pan-India",
+        availability: category.id === "litigation" || category.id === "document-registration" ? "Jaipur Only" : "Pan-India",
         icon: getIconForCategory(category.id),
     }));
 
@@ -35,7 +35,7 @@ export default function FeaturedServices() {
                         Comprehensive Legal Services
                     </h2>
                     <p className="text-lg leading-8 text-gray-600">
-                        From consultation to courtroom representation, we provide specialized legal solutions across 5 core service categories and 24 specialized services
+                        From consultation to courtroom representation, we provide specialized legal solutions across 6 core service categories and 28 specialized services
                     </p>
                 </motion.div>
 
@@ -116,7 +116,7 @@ export default function FeaturedServices() {
                         href="/services"
                         className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#051427] px-8 py-4 text-base font-semibold text-[#051427] hover:bg-[#051427] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
                     >
-                        View All Services (24 Total)
+                        View All Services (28 Total)
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
@@ -153,6 +153,12 @@ function getIconForCategory(categoryId: string): React.JSX.Element {
         "title-search-report": (
             <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+        ),
+        "document-registration": (
+            <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5h2m0 0h2m-2 0v2m0-2V3" />
             </svg>
         ),
     };

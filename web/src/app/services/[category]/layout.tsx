@@ -15,12 +15,12 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 
     if (!category) {
         return {
-            title: 'Service Not Found | RG Associates',
+            title: 'Service Not Found | RG Legal Solutions',
         };
     }
 
-    const metaTitle = `${category.title} Services in Jaipur | RG Associates - Expert Legal Counsel`;
-    const metaDescription = `${category.description} Professional ${category.title.toLowerCase()} services with ${category.subServices.length} specialized offerings. Contact RG Associates for expert legal guidance.`;
+    const metaTitle = `${category.title} Services in Jaipur | RG Legal Solutions - Expert Legal Counsel`;
+    const metaDescription = `${category.description} Professional ${category.title.toLowerCase()} services with ${category.subServices.length} specialized offerings. Contact RG Legal Solutions for expert legal guidance.`;
 
     return {
         title: metaTitle,
@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
         openGraph: {
             title: metaTitle,
             description: metaDescription,
-            url: `https://rgassociates.com/services/${resolvedParams.category}`,
-            siteName: 'RG Associates',
+            url: `https://rglegalsolutions.in/services/${resolvedParams.category}`,
+            siteName: 'RG Legal Solutions',
             locale: 'en_IN',
             type: 'website',
         },

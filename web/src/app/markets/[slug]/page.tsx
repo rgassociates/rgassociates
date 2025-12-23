@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const { slug } = await params;
     const market = getMarket(slug);
     return {
-        title: `${market.title} Legal Services | RG Associates`,
+        title: `${market.title} Legal Services | RG Legal Solutions`,
         description: `Expert legal counsel for the ${market.title} industry. We handle compliance, disputes, and contracts tailored to your sector's needs.`,
     };
 }

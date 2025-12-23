@@ -28,16 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!blog) {
         return {
-            title: 'Blog Not Found | RG Associates',
+            title: 'Blog Not Found | RG Legal Solutions',
         };
     }
 
     const title = blog.seo_title || blog.title;
     const description = blog.seo_description || blog.short_description;
-    const canonicalUrl = blog.canonical_url || `https://www.rgassociates.com/blog/${blog.slug}`;
+    const canonicalUrl = blog.canonical_url || `https://www.rglegalsolutions.in/blog/${blog.slug}`;
 
     return {
-        title: `${title} | RG Associates`,
+        title: `${title} | RG Legal Solutions`,
         description,
         keywords: blog.keywords?.join(', '),
         alternates: {
@@ -86,10 +86,10 @@ export default async function BlogDetailPage({ params }: Props) {
         },
         publisher: {
             '@type': 'LegalService',
-            name: 'RG Associates',
+            name: 'RG Legal Solutions',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://www.rgassociates.com/logo.png',
+                url: 'https://www.rglegalsolutions.in/logo.png',
             },
         },
         datePublished: blog.published_at,
@@ -97,7 +97,7 @@ export default async function BlogDetailPage({ params }: Props) {
         description: blog.short_description,
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://www.rgassociates.com/blog/${blog.slug}`,
+            '@id': `https://www.rglegalsolutions.in/blog/${blog.slug}`,
         },
     };
 

@@ -4,11 +4,11 @@ import { supabase, BlogPost } from '@/lib/supabase';
 import { motion } from 'framer-motion';
 
 export const metadata: Metadata = {
-    title: 'Legal Insights & News | RG Associates',
-    description: 'Stay updated with the latest legal trends, case studies, and expert insights from RG Associates. Your trusted source for legal knowledge in India.',
+    title: 'Legal Insights & News | RG Legal Solutions',
+    description: 'Stay updated with the latest legal trends, case studies, and expert insights from RG Legal Solutions. Your trusted source for legal knowledge in India.',
     openGraph: {
-        title: 'Legal Insights & News | RG Associates',
-        description: 'Stay updated with the latest legal trends, case studies, and expert insights from RG Associates.',
+        title: 'Legal Insights & News | RG Legal Solutions',
+        description: 'Stay updated with the latest legal trends, case studies, and expert insights from RG Legal Solutions.',
         type: 'website',
     },
 };
@@ -35,11 +35,11 @@ export default async function BlogPage() {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'Legal Insights & News',
-        description: 'Latest legal articles and insights from RG Associates',
-        url: 'https://www.rgassociates.com/blog',
+        description: 'Latest legal articles and insights from RG Legal Solutions',
+        url: 'https://www.rglegalsolutions.in/blog',
         publisher: {
             '@type': 'LegalService',
-            name: 'RG Associates',
+            name: 'RG Legal Solutions',
         },
     };
 

@@ -17,12 +17,12 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 
     if (!category || !service) {
         return {
-            title: 'Service Not Found | RG Associates',
+            title: 'Service Not Found | RG Legal Solutions',
         };
     }
 
     // Use the service's metadata if available
-    const metaTitle = service.metadata?.metaTitle || `${service.title} | ${category.title} | RG Associates`;
+    const metaTitle = service.metadata?.metaTitle || `${service.title} | ${category.title} | RG Legal Solutions`;
     const metaDescription = service.metadata?.metaDescription || service.description;
     const keywords = service.metadata?.keywords || [service.title.toLowerCase(), category.title.toLowerCase()];
 
@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
         openGraph: {
             title: metaTitle,
             description: metaDescription,
-            url: `https://rgassociates.com/services/${resolvedParams.category}/${resolvedParams.service}`,
-            siteName: 'RG Associates',
+            url: `https://rglegalsolutions.in/services/${resolvedParams.category}/${resolvedParams.service}`,
+            siteName: 'RG Legal Solutions',
             locale: 'en_IN',
             type: 'website',
         },

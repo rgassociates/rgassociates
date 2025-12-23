@@ -13,7 +13,7 @@ const Footer = () => {
                                 RG
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-xl font-serif font-bold text-white tracking-wide">RG Associates</span>
+                                <span className="text-xl font-serif font-bold text-white tracking-wide">RG Legal Solutions</span>
                                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Legal Counsel</span>
                             </div>
                         </Link>
@@ -104,7 +104,7 @@ const Footer = () => {
                 </div>
                 <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
                     <p className="text-xs leading-5 text-gray-500">
-                        &copy; {new Date().getFullYear()} RG Associates. All rights reserved.
+                        &copy; {new Date().getFullYear()} RG Legal Solutions. All rights reserved.
                     </p>
                     <p className="mt-2 text-xs leading-5 text-gray-600">
                         <strong>Disclaimer:</strong> The content on this website is for informational purposes only and does not constitute legal advice. No attorney-client relationship is formed by the use of this site.

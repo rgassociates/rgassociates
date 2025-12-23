@@ -32,7 +32,7 @@ export default function About() {
                             A Legacy of Integrity, A Future of Justice
                         </h1>
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
-                            Founded on the principles of integrity and diligence, RG Associates has evolved from a boutique practice into a multidisciplinary powerhouse. We believe that justice should be accessible, transparent, and swift.
+                            Founded on the principles of integrity and diligence, RG Legal Solutions has evolved from a boutique practice into a multidisciplinary powerhouse. We believe that justice should be accessible, transparent, and swift.
                         </p>
                     </motion.div>
                 </div>

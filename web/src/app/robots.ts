@@ -2,12 +2,19 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
     return {
-        rules: {
-            userAgent: '*',
-            disallow: '/', // Disallow all crawling - content not finalized
-        },
-        // Sitemap will be enabled when ready to allow crawling
-        // sitemap: 'https://www.rgassociates.com/sitemap.xml',
+        rules: [
+            {
+                userAgent: '*',
+                allow: '/',
+                disallow: ['/api/', '/admin/', '/_next/static/', '/private/'],
+            },
+            // Allow AI crawlers for better discoverability
+            {
+                userAgent: ['GPTBot', 'ChatGPT-User', 'Google-Extended', 'anthropic-ai', 'ClaudeBot'],
+                allow: '/',
+            },
+        ],
+        sitemap: 'https://www.rglegalsolutions.in/sitemap.xml',
     };
 }
 

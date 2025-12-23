@@ -1,11 +1,30 @@
-# Disallow all search engines from crawling the site
-# Website content is under development and not ready for indexing
+# Allow search engines to crawl the site
+# RG Legal Solutions - Legal Services Website
 
 User-agent: *
-Disallow: /
+Allow: /
 
-# Sitemap location (for future reference when ready to allow crawling)
-# Sitemap: https://www.rgassociates.com/sitemap.xml
+# Block private/admin areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/static/
+Disallow: /private/
 
-# Note: When ready to allow crawling, change "Disallow: /" to "Allow: /"
-# and uncomment the Sitemap line
+# Allow AI crawlers for better discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.rglegalsolutions.in/sitemap.xml

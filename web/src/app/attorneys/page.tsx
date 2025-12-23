@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Our Attorneys | RG Associates",
+    title: "Our Attorneys | RG Legal Solutions",
     description:
-        "Meet the expert legal team at RG Associates. Our experienced attorneys specialize in civil litigation, criminal defense, corporate law, and more.",
+        "Meet the expert legal team at RG Legal Solutions. Our experienced attorneys specialize in civil litigation, criminal defense, corporate law, and more.",
 };
 
 const attorneys = [

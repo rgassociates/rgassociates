@@ -74,6 +74,20 @@ export const serviceCategories: ServiceCategory[] = [
             "agricultural-land-verification",
             "encumbrance-certificate"
         ]
+    },
+    {
+        id: "document-registration",
+        title: "Document Registration",
+        slug: "document-registration",
+        description: "Professional document registration services in Jaipur. Expert assistance with property registration, sale deeds, lease agreements, and all legal document registration at Sub-Registrar offices.",
+        shortDescription: "Complete document registration services for property, agreements, and legal documents in Jaipur.",
+        icon: "document-registration",
+        subServices: [
+            "property-sale-deed-registration",
+            "lease-agreement-registration",
+            "gift-deed-registration",
+            "power-of-attorney-registration"
+        ]
     }
 ];
 

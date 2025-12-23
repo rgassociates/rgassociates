@@ -277,7 +277,7 @@ export default function Contact() {
                                     allowFullScreen={true}
                                     loading="lazy"
                                     referrerPolicy="no-referrer-when-downgrade"
-                                    title="RG Associates Location"
+                                    title="RG Legal Solutions Location"
                                 ></iframe>
                             </div>
                             <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
