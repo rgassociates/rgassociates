@@ -9,6 +9,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
+    const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null);
 
     // Handle scroll effect for sticky header
     useEffect(() => {
@@ -98,37 +99,50 @@ const Header = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: 10 }}
                                             transition={{ duration: 0.2 }}
-                                            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-screen max-w-md"
+                                            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-screen max-w-4xl"
                                         >
                                             <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-gray-900/5 p-6">
                                                 <div className="mb-4">
                                                     <h3 className="text-sm font-semibold text-gray-900 mb-2">Our Services</h3>
                                                     <p className="text-xs text-gray-600">Comprehensive legal solutions for every need</p>
                                                 </div>
-                                                <div className="grid grid-cols-1 gap-3">
+                                                <div className="grid grid-cols-2 gap-4">
                                                     {serviceCategories.map((category) => (
-                                                        <Link
-                                                            key={category.id}
-                                                            href={`/services/${category.slug}`}
-                                                            className="group flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
-                                                        >
-                                                            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#D4A646]/10 flex items-center justify-center group-hover:bg-[#D4A646]/20 transition-colors">
-                                                                <svg className="h-5 w-5 text-[#D4A646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                                        <div key={category.id} className="group">
+                                                            <Link
+                                                                href={`/services/${category.slug}`}
+                                                                className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                                            >
+                                                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#D4A646]/10 flex items-center justify-center group-hover:bg-[#D4A646]/20 transition-colors">
+                                                                    <svg className="h-5 w-5 text-[#D4A646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div className="flex-1 min-w-0">
+                                                                    <p className="text-sm font-semibold text-gray-900 group-hover:text-[#D4A646] transition-colors">
+                                                                        {category.title}
+                                                                    </p>
+                                                                    <p className="text-xs text-gray-600 mt-0.5">
+                                                                        {category.subServices.length} services
+                                                                    </p>
+                                                                </div>
+                                                                <svg className="h-5 w-5 text-gray-400 group-hover:text-[#D4A646] transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                                 </svg>
+                                                            </Link>
+                                                            {/* Sub-services dropdown on hover */}
+                                                            <div className="hidden group-hover:block ml-6 mt-1 space-y-1 pl-3 border-l-2 border-gray-200">
+                                                                {category.subServices.map((subService) => (
+                                                                    <Link
+                                                                        key={subService}
+                                                                        href={`/services/${category.slug}/${subService}`}
+                                                                        className="block px-3 py-1.5 text-xs text-gray-600 hover:text-[#D4A646] hover:bg-gray-50 rounded transition-colors"
+                                                                    >
+                                                                        {subService.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                                                                    </Link>
+                                                                ))}
                                                             </div>
-                                                            <div className="flex-1 min-w-0">
-                                                                <p className="text-sm font-semibold text-gray-900 group-hover:text-[#D4A646] transition-colors">
-                                                                    {category.title}
-                                                                </p>
-                                                                <p className="text-xs text-gray-600 mt-0.5 line-clamp-1">
-                                                                    {category.subServices.length} services
-                                                                </p>
-                                                            </div>
-                                                            <svg className="h-5 w-5 text-gray-400 group-hover:text-[#D4A646] transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                            </svg>
-                                                        </Link>
+                                                        </div>
                                                     ))}
                                                 </div>
                                                 <div className="mt-4 pt-4 border-t border-gray-100">
@@ -183,26 +197,89 @@ const Header = () => {
                         <div className="space-y-1 px-6 pb-6 pt-6">
                             {navigation.map((item) => (
                                 <div key={item.name}>
-                                    <Link
-                                        href={item.href}
-                                        className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
-                                        onClick={() => setIsMenuOpen(false)}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                    {item.hasDropdown && (
-                                        <div className="ml-4 mt-2 space-y-2">
-                                            {serviceCategories.map((category) => (
-                                                <Link
-                                                    key={category.id}
-                                                    href={`/services/${category.slug}`}
-                                                    className="block rounded-lg px-3 py-2 text-sm text-gray-400 hover:bg-white/10 hover:text-accent transition-colors"
-                                                    onClick={() => setIsMenuOpen(false)}
+                                    {item.hasDropdown ? (
+                                        <div>
+                                            <button
+                                                onClick={() => setExpandedMobileCategory(expandedMobileCategory === 'services' ? null : 'services')}
+                                                className="flex items-center justify-between w-full rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                                            >
+                                                {item.name}
+                                                <svg
+                                                    className={`h-5 w-5 transition-transform ${expandedMobileCategory === 'services' ? 'rotate-180' : ''}`}
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
                                                 >
-                                                    {category.title}
-                                                </Link>
-                                            ))}
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </button>
+                                            {(expandedMobileCategory === 'services' || serviceCategories.some(cat => cat.slug === expandedMobileCategory)) && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="ml-4 mt-2 space-y-2 overflow-hidden"
+                                                >
+                                                    {serviceCategories.map((category) => (
+                                                        <div key={category.id}>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    setExpandedMobileCategory(expandedMobileCategory === category.slug ? 'services' : category.slug);
+                                                                }}
+                                                                className="flex items-center justify-between w-full rounded-lg px-3 py-2 text-sm text-gray-400 hover:bg-white/10 hover:text-accent transition-colors"
+                                                            >
+                                                                <span>{category.title}</span>
+                                                                <svg
+                                                                    className={`h-4 w-4 transition-transform ${expandedMobileCategory === category.slug ? 'rotate-180' : ''}`}
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    stroke="currentColor"
+                                                                >
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                                </svg>
+                                                            </button>
+                                                            <AnimatePresence>
+                                                                {expandedMobileCategory === category.slug && (
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, height: 0 }}
+                                                                        animate={{ opacity: 1, height: 'auto' }}
+                                                                        exit={{ opacity: 0, height: 0 }}
+                                                                        className="ml-4 mt-1 space-y-1 overflow-hidden"
+                                                                    >
+                                                                        <Link
+                                                                            href={`/services/${category.slug}`}
+                                                                            className="block rounded-lg px-3 py-1.5 text-xs text-accent hover:bg-white/10 transition-colors"
+                                                                            onClick={() => setIsMenuOpen(false)}
+                                                                        >
+                                                                            View All {category.title}
+                                                                        </Link>
+                                                                        {category.subServices.map((subService) => (
+                                                                            <Link
+                                                                                key={subService}
+                                                                                href={`/services/${category.slug}/${subService}`}
+                                                                                className="block rounded-lg px-3 py-1.5 text-xs text-gray-500 hover:bg-white/10 hover:text-gray-300 transition-colors"
+                                                                                onClick={() => setIsMenuOpen(false)}
+                                                                            >
+                                                                                {subService.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                                                                            </Link>
+                                                                        ))}
+                                                                    </motion.div>
+                                                                )}
+                                                            </AnimatePresence>
+                                                        </div>
+                                                    ))}
+                                                </motion.div>
+                                            )}
                                         </div>
+                                    ) : (
+                                        <Link
+                                            href={item.href}
+                                            className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            {item.name}
+                                        </Link>
                                     )}
                                 </div>
                             ))}

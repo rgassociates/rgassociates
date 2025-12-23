@@ -287,6 +287,7 @@ export default function HeroSection() {
                                         <option value="litigation">Litigation (Jaipur Only)</option>
                                         <option value="research">Legal Research (Pan-India)</option>
                                         <option value="title-search">Title Search (Pan-India)</option>
+                                        <option value="document-registration">Document Registration (Jaipur Only)</option>
                                     </select>
                                 </div>
 

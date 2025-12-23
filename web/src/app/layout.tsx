@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   title: "RG Legal Solutions | Expert legal counsel in Jaipur",
   description:
     "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
+  icons: {
+    icon: '/RGlogowithoutbg.ico',
+    shortcut: '/RGlogowithoutbg.ico',
+    apple: '/RGlogowithoutbg.ico',
+  },
 };
 
 export default function RootLayout({
