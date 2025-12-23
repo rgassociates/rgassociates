@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { submitContactForm } from './actions';
+import { sendEmailNotification } from '@/lib/emailService';
 
 export default function Contact() {
     const [agreed, setAgreed] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     return (
         <div className="bg-white">
@@ -66,13 +68,57 @@ export default function Contact() {
                                 Fill out the form below and we will get back to you as soon as possible.
                             </p>
                             <form action={async (formData) => {
-                                const result = await submitContactForm(formData);
-                                if (result.error) {
-                                    alert(result.error);
-                                } else {
+                                setIsSubmitting(true);
+                                try {
+                                    // Extract form data
+                                    const firstName = formData.get('first-name') as string;
+                                    const lastName = formData.get('last-name') as string;
+                                    const email = formData.get('email') as string;
+                                    const phone = formData.get('phone-number') as string;
+                                    const serviceType = formData.get('service-type') as string;
+                                    const message = formData.get('message') as string;
+
+                                    console.log('📝 Contact Form Data:', {
+                                        firstName,
+                                        lastName,
+                                        email,
+                                        phone,
+                                        serviceType,
+                                        message
+                                    });
+
+                                    // Submit to database
+                                    const result = await submitContactForm(formData);
+                                    if (result.error) {
+                                        alert(result.error);
+                                        setIsSubmitting(false);
+                                        return;
+                                    }
+
+                                    // Send email notification
+                                    const emailResult = await sendEmailNotification({
+                                        first_name: firstName,
+                                        last_name: lastName,
+                                        email: email,
+                                        phone: phone,
+                                        service_type: serviceType || 'General Inquiry',
+                                        message: message,
+                                        form_type: 'contact',
+                                    });
+
+                                    if (!emailResult.success) {
+                                        console.warn('Email notification failed:', emailResult.error);
+                                    }
+
                                     alert(result.success);
-                                    // Optional: Reset form logic here if needed, though standard form submission might refresh or you can use a ref to reset.
-                                    // For a better UX, we could use state to show a success message inline instead of an alert.
+                                    // Reset form
+                                    (document.querySelector('form') as HTMLFormElement)?.reset();
+                                    setAgreed(false);
+                                } catch (error) {
+                                    console.error('Form submission error:', error);
+                                    alert('An unexpected error occurred. Please try again.');
+                                } finally {
+                                    setIsSubmitting(false);
                                 }
                             }}>
                                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

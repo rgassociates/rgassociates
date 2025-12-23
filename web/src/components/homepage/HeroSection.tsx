@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button, Badge } from "@/components/ui";
 import { submitHeroForm } from "@/app/actions/heroForm";
+import { sendEmailNotification } from "@/lib/emailService";
 
 export default function HeroSection() {
     const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ export default function HeroSection() {
         setIsSubmitting(true);
 
         try {
+            // Submit to database
             const result = await submitHeroForm({
                 firstName: formData.firstName,
                 lastName: formData.lastName,
@@ -31,6 +33,22 @@ export default function HeroSection() {
                 alert(result.error);
                 setIsSubmitting(false);
                 return;
+            }
+
+            // Send email notification
+            const emailResult = await sendEmailNotification({
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: null,
+                phone: formData.phone,
+                service_type: formData.service,
+                message: `Quick consultation request via homepage for ${formData.service}`,
+                form_type: 'hero',
+            });
+
+            if (!emailResult.success) {
+                console.warn('Email notification failed:', emailResult.error);
+                // Don't fail the form submission if email fails
             }
 
             // Show success message
