@@ -6,7 +6,6 @@
 
 import { z } from 'zod';
 import validator from 'validator';
-import DOMPurify from 'isomorphic-dompurify';
 
 /**
  * Name validation schema
@@ -83,15 +82,29 @@ export const messageSchema = z.string()
 
 /**
  * Sanitize a string to prevent XSS attacks
+ * Simple regex-based sanitization (serverless-compatible)
  * 
  * @param input - The string to sanitize
  * @returns Sanitized string safe for display
  */
 export function sanitizeString(input: string): string {
-    return DOMPurify.sanitize(input.trim(), {
-        ALLOWED_TAGS: [], // Strip all HTML tags
-        ALLOWED_ATTR: [], // Strip all attributes
-    });
+    if (!input) return '';
+
+    return input
+        .trim()
+        // Remove HTML tags
+        .replace(/<[^>]*>/g, '')
+        // Remove script tags and content
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+        // Remove event handlers
+        .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
+        // Remove javascript: protocol
+        .replace(/javascript:/gi, '')
+        // Remove data: protocol
+        .replace(/data:/gi, '')
+        // Normalize whitespace
+        .replace(/\s+/g, ' ')
+        .trim();
 }
 
 /**

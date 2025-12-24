@@ -81,7 +81,7 @@ const Footer = () => {
                                 <ul role="list" className="mt-6 space-y-4 text-sm leading-6 text-gray-400">
                                     <li>Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar, Jaipur, Rajasthan 302033</li>
                                     <li><a href="tel:09309212401" className="hover:text-white">093092 12401</a></li>
-                                    <li><a href="mailto:rgassociatesjaipur@gmail.com" className="hover:text-white">rgassociatesjaipur@gmail.com</a></li>
+                                    <li><a href="mailto:rgassociatesjaipur@gmail.com" className="hover:text-white break-all">rgassociatesjaipur@gmail.com</a></li>
                                 </ul>
                             </div>
                             <div className="mt-10 md:mt-0">
