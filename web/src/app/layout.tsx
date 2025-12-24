@@ -15,6 +15,28 @@ export const metadata: Metadata = {
     shortcut: '/RGlogowithoutbg.ico',
     apple: '/RGlogowithoutbg.ico',
   },
+  openGraph: {
+    title: "RG Legal Solutions | Expert legal counsel in Jaipur",
+    description: "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
+    url: "https://www.rglegalsolutions.in",
+    siteName: "RG Legal Solutions",
+    images: [
+      {
+        url: '/RGlogowithoutbg.webp',
+        width: 1200,
+        height: 630,
+        alt: 'RG Legal Solutions Logo',
+      },
+    ],
+    locale: 'en_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "RG Legal Solutions | Expert legal counsel in Jaipur",
+    description: "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
+    images: ['/RGlogowithoutbg.webp'],
+  },
 };
 
 export default function RootLayout({

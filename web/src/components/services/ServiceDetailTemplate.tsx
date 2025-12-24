@@ -28,7 +28,7 @@ export default function ServiceDetailTemplate({
             />
 
             {/* Hero Section */}
-            <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#051427] via-[#0A1A2F] to-[#051427] py-20 sm:py-24">
+            <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#051427] via-[#0A1A2F] to-[#051427] pt-32 pb-20 sm:py-24">
                 <div className="absolute inset-0 opacity-10">
                     <div
                         className="absolute inset-0"
