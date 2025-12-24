@@ -1,5 +1,6 @@
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from './emailConfig';
+import { logger } from './logger';
 
 // Initialize EmailJS with your public key
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
@@ -43,7 +44,7 @@ export const sendEmailNotification = async (params: EmailParams): Promise<{ succ
                 : 'General Inquiry',
         };
 
-        console.log('📧 Sending email with params:', emailParams);
+        logger.info('📧 Sending email with params:', emailParams);
 
         // Send email via EmailJS
         const response = await emailjs.send(
@@ -53,14 +54,14 @@ export const sendEmailNotification = async (params: EmailParams): Promise<{ succ
         );
 
         if (response.status === 200) {
-            console.log('✅ Email sent successfully:', response);
+            logger.info('✅ Email sent successfully:', response);
             return { success: true };
         } else {
-            console.error('❌ Email send failed:', response);
+            logger.error('❌ Email send failed:', response);
             return { success: false, error: 'Failed to send email' };
         }
     } catch (error) {
-        console.error('❌ EmailJS Error:', error);
+        logger.error('❌ EmailJS Error:', error);
         return {
             success: false,
             error: error instanceof Error ? error.message : 'Unknown error occurred'

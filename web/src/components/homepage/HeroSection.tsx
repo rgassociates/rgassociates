@@ -5,13 +5,22 @@ import { useState } from "react";
 import { Button, Badge } from "@/components/ui";
 import { submitHeroForm } from "@/app/actions/heroForm";
 import { sendEmailNotification } from "@/lib/emailService";
+import { getHoneypotProps } from "@/lib/honeypot";
+
 
 export default function HeroSection() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<{
+        firstName: string;
+        lastName: string;
+        phone: string;
+        service: 'consultation' | 'documentation' | 'notice' | 'litigation' | 'research' | 'title-search' | 'document-registration' | '';
+        website: string;
+    }>({
         firstName: "",
         lastName: "",
         phone: "",
         service: "",
+        website: "", // Honeypot field
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -26,7 +35,8 @@ export default function HeroSection() {
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 phone: formData.phone,
-                serviceType: formData.service,
+                serviceType: formData.service as 'consultation' | 'documentation' | 'notice' | 'litigation' | 'research' | 'title-search' | 'document-registration',
+                website: formData.website, // Include honeypot
             });
 
             if (result.error) {
@@ -60,6 +70,7 @@ export default function HeroSection() {
                 lastName: "",
                 phone: "",
                 service: "",
+                website: "", // Reset honeypot
             });
 
             // Hide success message after 5 seconds
@@ -296,7 +307,7 @@ export default function HeroSection() {
                                         disabled={isSubmitting}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646] focus:border-transparent transition-all text-[#051427] disabled:bg-gray-100 disabled:cursor-not-allowed"
                                         value={formData.service}
-                                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                                        onChange={(e) => setFormData({ ...formData, service: e.target.value as typeof formData.service })}
                                     >
                                         <option value="">Select Service Type *</option>
                                         <option value="consultation">Legal Consultation (Pan-India)</option>
@@ -308,6 +319,13 @@ export default function HeroSection() {
                                         <option value="document-registration">Document Registration (Jaipur Only)</option>
                                     </select>
                                 </div>
+
+                                {/* Honeypot field - invisible to users, visible to bots */}
+                                <input
+                                    {...getHoneypotProps()}
+                                    value={formData.website}
+                                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                                />
 
                                 <Button type="submit" variant="primary" size="lg" fullWidth loading={isSubmitting}>
                                     {isSubmitting ? "Submitting..." : "Submit Request"}

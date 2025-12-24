@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { submitContactForm } from './actions';
 import { sendEmailNotification } from '@/lib/emailService';
+import { getHoneypotProps } from '@/lib/honeypot';
 
 export default function Contact() {
     const [agreed, setAgreed] = useState(false);
@@ -219,6 +220,9 @@ export default function Contact() {
                                             I understand that this website is for informational purposes only and submitting this form does not create an attorney-client relationship.
                                         </label>
                                     </div>
+
+                                    {/* Honeypot field - invisible to users, visible to bots */}
+                                    <input {...getHoneypotProps()} />
                                 </div>
                                 <div className="mt-8">
                                     <button

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { serviceCategories } from '@/data/serviceCategories';
+import { getSubServiceById } from '@/data/subServices';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,22 +32,20 @@ const Header = () => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[#051427]/95 backdrop-blur-md shadow-lg py-3' : 'bg-[#051427] py-5'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+                ? 'bg-[#FAFAFA]/95 backdrop-blur-lg shadow-xl border-b border-gray-200 py-3'
+                : 'bg-[#FAFAFA] py-5 shadow-md border-b border-gray-100'
                 }`}
         >
             <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3 group">
+                    <Link href="/" className="-m-1.5 p-1.5 group">
                         {/* Logo Image */}
                         <img
-                            src="/RGlogowithoutbg.webp"
+                            src="/logohoribg.png"
                             alt="RG Legal Solutions Logo"
-                            className="h-12 w-12 object-contain"
+                            className="h-12 object-contain group-hover:opacity-90 transition-opacity"
                         />
-                        <div className="flex flex-col">
-                            <span className="text-xl font-serif font-bold text-white tracking-wide group-hover:text-accent transition-colors">RG Legal Solutions</span>
-                            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Expert Legal Services</span>
-                        </div>
                     </Link>
                 </div>
 
@@ -54,7 +53,7 @@ const Header = () => {
                 <div className="flex lg:hidden">
                     <button
                         type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-300 hover:text-white"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-800 hover:text-[#D4A646]"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
                         <span className="sr-only">Open main menu</span>
@@ -82,7 +81,7 @@ const Header = () => {
                             >
                                 <Link
                                     href={item.href}
-                                    className="text-sm font-medium leading-6 text-gray-300 hover:text-accent transition-colors relative group flex items-center gap-1"
+                                    className="text-sm font-semibold leading-6 text-gray-800 hover:text-[#D4A646] transition-colors relative group flex items-center gap-1"
                                 >
                                     {item.name}
                                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -132,15 +131,19 @@ const Header = () => {
                                                             </Link>
                                                             {/* Sub-services dropdown on hover */}
                                                             <div className="hidden group-hover:block ml-6 mt-1 space-y-1 pl-3 border-l-2 border-gray-200">
-                                                                {category.subServices.map((subService) => (
-                                                                    <Link
-                                                                        key={subService}
-                                                                        href={`/services/${category.slug}/${subService}`}
-                                                                        className="block px-3 py-1.5 text-xs text-gray-600 hover:text-[#D4A646] hover:bg-gray-50 rounded transition-colors"
-                                                                    >
-                                                                        {subService.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                                                                    </Link>
-                                                                ))}
+                                                                {category.subServices.map((subServiceId) => {
+                                                                    const subService = getSubServiceById(subServiceId);
+                                                                    if (!subService) return null;
+                                                                    return (
+                                                                        <Link
+                                                                            key={subServiceId}
+                                                                            href={`/services/${category.slug}/${subService.slug}`}
+                                                                            className="block px-3 py-1.5 text-xs text-gray-600 hover:text-[#D4A646] hover:bg-gray-50 rounded transition-colors"
+                                                                        >
+                                                                            {subService.title}
+                                                                        </Link>
+                                                                    );
+                                                                })}
                                                             </div>
                                                         </div>
                                                     ))}
@@ -165,7 +168,7 @@ const Header = () => {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className="text-sm font-medium leading-6 text-gray-300 hover:text-accent transition-colors relative group"
+                                className="text-sm font-semibold leading-6 text-gray-800 hover:text-[#D4A646] transition-colors relative group"
                             >
                                 {item.name}
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
@@ -177,7 +180,7 @@ const Header = () => {
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <Link
                         href="/contact"
-                        className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-primary-900 shadow-sm hover:bg-white transition-colors"
+                        className="rounded-lg bg-[#D4A646] px-5 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-[#C8A34E] hover:shadow-xl transition-all duration-300"
                     >
                         Get Consultation
                     </Link>
@@ -201,7 +204,7 @@ const Header = () => {
                                         <div>
                                             <button
                                                 onClick={() => setExpandedMobileCategory(expandedMobileCategory === 'services' ? null : 'services')}
-                                                className="flex items-center justify-between w-full rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                                                className="flex items-center justify-between w-full rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-[#D4A646]/10 hover:text-[#D4A646] transition-colors"
                                             >
                                                 {item.name}
                                                 <svg
@@ -227,7 +230,7 @@ const Header = () => {
                                                                 onClick={() => {
                                                                     setExpandedMobileCategory(expandedMobileCategory === category.slug ? 'services' : category.slug);
                                                                 }}
-                                                                className="flex items-center justify-between w-full rounded-lg px-3 py-2 text-sm text-gray-400 hover:bg-white/10 hover:text-accent transition-colors"
+                                                                className="flex items-center justify-between w-full rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-[#D4A646]/10 hover:text-[#D4A646] transition-colors"
                                                             >
                                                                 <span>{category.title}</span>
                                                                 <svg
@@ -249,21 +252,25 @@ const Header = () => {
                                                                     >
                                                                         <Link
                                                                             href={`/services/${category.slug}`}
-                                                                            className="block rounded-lg px-3 py-1.5 text-xs text-accent hover:bg-white/10 transition-colors"
+                                                                            className="block rounded-lg px-3 py-1.5 text-xs text-[#D4A646] font-semibold hover:bg-[#D4A646]/10 transition-colors"
                                                                             onClick={() => setIsMenuOpen(false)}
                                                                         >
                                                                             View All {category.title}
                                                                         </Link>
-                                                                        {category.subServices.map((subService) => (
-                                                                            <Link
-                                                                                key={subService}
-                                                                                href={`/services/${category.slug}/${subService}`}
-                                                                                className="block rounded-lg px-3 py-1.5 text-xs text-gray-500 hover:bg-white/10 hover:text-gray-300 transition-colors"
-                                                                                onClick={() => setIsMenuOpen(false)}
-                                                                            >
-                                                                                {subService.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                                                                            </Link>
-                                                                        ))}
+                                                                        {category.subServices.map((subServiceId) => {
+                                                                            const subService = getSubServiceById(subServiceId);
+                                                                            if (!subService) return null;
+                                                                            return (
+                                                                                <Link
+                                                                                    key={subServiceId}
+                                                                                    href={`/services/${category.slug}/${subService.slug}`}
+                                                                                    className="block rounded-lg px-3 py-1.5 text-xs text-gray-700 hover:bg-[#D4A646]/10 hover:text-[#D4A646] transition-colors"
+                                                                                    onClick={() => setIsMenuOpen(false)}
+                                                                                >
+                                                                                    {subService.title}
+                                                                                </Link>
+                                                                            );
+                                                                        })}
                                                                     </motion.div>
                                                                 )}
                                                             </AnimatePresence>
@@ -275,7 +282,7 @@ const Header = () => {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                                            className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:bg-[#D4A646]/10 hover:text-[#D4A646] transition-colors"
                                             onClick={() => setIsMenuOpen(false)}
                                         >
                                             {item.name}
@@ -285,7 +292,7 @@ const Header = () => {
                             ))}
                             <Link
                                 href="/contact"
-                                className="block rounded-lg bg-accent px-3 py-2.5 text-center text-base font-semibold text-primary-900 hover:bg-white transition-colors mt-4"
+                                className="block rounded-lg bg-[#D4A646] px-3 py-2.5 text-center text-base font-semibold text-white hover:bg-[#C8A34E] shadow-lg hover:shadow-xl transition-all duration-300 mt-4"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Get Consultation
