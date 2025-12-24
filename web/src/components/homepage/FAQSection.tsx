@@ -168,14 +168,20 @@ function FAQItem({
             transition={{ delay: index * 0.05, duration: 0.4 }}
         >
             <div className="border border-gray-200 rounded-xl overflow-hidden hover:border-[#D4A646] transition-colors">
-                <button
+                <motion.button
                     onClick={onClick}
-                    className="w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
+                    className="w-full flex items-center justify-between p-6 text-left bg-white transition-colors"
+                    whileHover={{
+                        backgroundColor: "rgba(212, 166, 70, 0.03)",
+                        x: 4,
+                        transition: { duration: 0.2 }
+                    }}
                 >
                     <div className="flex items-start gap-4 flex-1">
-                        <div
+                        <motion.div
                             className={`flex-shrink-0 h-8 w-8 rounded-lg flex items-center justify-center transition-colors ${isOpen ? "bg-[#D4A646] text-[#051427]" : "bg-gray-100 text-gray-600"
                                 }`}
+                            whileHover={{ scale: 1.1, rotate: 5 }}
                         >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path
@@ -185,7 +191,7 @@ function FAQItem({
                                     d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                 />
                             </svg>
-                        </div>
+                        </motion.div>
                         <span className="font-semibold text-[#051427] pr-8">{faq.question}</span>
                     </div>
                     <motion.div
@@ -197,7 +203,7 @@ function FAQItem({
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                     </motion.div>
-                </button>
+                </motion.button>
 
                 <AnimatePresence>
                     {isOpen && (

@@ -39,12 +39,21 @@ const Header = () => {
         >
             <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5 group">
-                        {/* Logo Image */}
-                        <img
+                    <Link href="/" className="-m-1.5 p-1.5">
+                        {/* Logo Image with Smooth Zoom */}
+                        <motion.img
                             src="/logohoribg.png"
                             alt="RG Legal Solutions Logo"
-                            className="h-12 object-contain group-hover:opacity-90 transition-opacity"
+                            className="h-12 object-contain"
+                            whileHover={{
+                                scale: 1.08,
+                                transition: {
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 20
+                                }
+                            }}
+                            whileTap={{ scale: 0.95 }}
                         />
                     </Link>
                 </div>
@@ -98,16 +107,17 @@ const Header = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: 10 }}
                                             transition={{ duration: 0.2 }}
-                                            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-screen max-w-4xl"
+                                            className="absolute left-0 top-full mt-3 w-80"
                                         >
                                             <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-gray-900/5 p-6">
                                                 <div className="mb-4">
                                                     <h3 className="text-sm font-semibold text-gray-900 mb-2">Our Services</h3>
                                                     <p className="text-xs text-gray-600">Comprehensive legal solutions for every need</p>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-4">
+                                                {/* Vertical list of all services */}
+                                                <div className="space-y-2">
                                                     {serviceCategories.map((category) => (
-                                                        <div key={category.id} className="group">
+                                                        <div key={category.id} className="group relative">
                                                             <Link
                                                                 href={`/services/${category.slug}`}
                                                                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
@@ -129,21 +139,24 @@ const Header = () => {
                                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                                 </svg>
                                                             </Link>
-                                                            {/* Sub-services dropdown on hover */}
-                                                            <div className="hidden group-hover:block ml-6 mt-1 space-y-1 pl-3 border-l-2 border-gray-200">
-                                                                {category.subServices.map((subServiceId) => {
-                                                                    const subService = getSubServiceById(subServiceId);
-                                                                    if (!subService) return null;
-                                                                    return (
-                                                                        <Link
-                                                                            key={subServiceId}
-                                                                            href={`/services/${category.slug}/${subService.slug}`}
-                                                                            className="block px-3 py-1.5 text-xs text-gray-600 hover:text-[#D4A646] hover:bg-gray-50 rounded transition-colors"
-                                                                        >
-                                                                            {subService.title}
-                                                                        </Link>
-                                                                    );
-                                                                })}
+                                                            {/* Sub-services dropdown on hover - Right side */}
+                                                            <div className="hidden group-hover:block absolute left-full top-0 ml-2 w-64 bg-white rounded-xl shadow-xl ring-1 ring-gray-900/5 p-4 z-10">
+                                                                <h4 className="text-xs font-semibold text-gray-900 mb-2">{category.title}</h4>
+                                                                <div className="space-y-1">
+                                                                    {category.subServices.map((subServiceId) => {
+                                                                        const subService = getSubServiceById(subServiceId);
+                                                                        if (!subService) return null;
+                                                                        return (
+                                                                            <Link
+                                                                                key={subServiceId}
+                                                                                href={`/services/${category.slug}/${subService.slug}`}
+                                                                                className="block px-3 py-2 text-sm text-gray-600 hover:text-[#D4A646] hover:bg-gray-50 rounded transition-colors"
+                                                                            >
+                                                                                {subService.title}
+                                                                            </Link>
+                                                                        );
+                                                                    })}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     ))}

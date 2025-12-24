@@ -67,16 +67,15 @@ export default function Button({
         <motion.button
             className={combinedStyles}
             whileHover={{
-                scale: 1.03,
-                y: -3,
+                scale: 1.08,
                 transition: {
                     type: "spring",
-                    stiffness: 400,
-                    damping: 17
+                    stiffness: 300,
+                    damping: 20
                 }
             }}
             whileTap={{
-                scale: 0.98,
+                scale: 0.95,
                 transition: { duration: 0.1 }
             }}
             animate={pulseAnimation}

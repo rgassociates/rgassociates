@@ -14,7 +14,7 @@ const attorneys = [
         name: "Rajesh Gupta",
         role: "Senior Partner",
         specialization: "Corporate Law & Civil Litigation",
-        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://placehold.co/600x800/051427/D4A646?text=RG",
         bio: "With over 25 years of experience, Rajesh leads the firm's corporate practice, advising major conglomerates on mergers and compliance.",
     },
     {
@@ -22,7 +22,7 @@ const attorneys = [
         name: "Priya Sharma",
         role: "Partner",
         specialization: "Family Law & Mediation",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://placehold.co/600x800/051427/D4A646?text=PS",
         bio: "Priya is a compassionate advocate known for her expertise in complex family disputes and successful mediation strategies.",
     },
     {
@@ -30,7 +30,7 @@ const attorneys = [
         name: "Amit Verma",
         role: "Senior Associate",
         specialization: "Criminal Defense",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://placehold.co/600x800/051427/D4A646?text=AV",
         bio: "Amit is a tenacious litigator with a strong track record in defending clients against serious criminal charges.",
     },
     {
@@ -38,7 +38,7 @@ const attorneys = [
         name: "Sneha Reddy",
         role: "Associate",
         specialization: "Intellectual Property",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "https://placehold.co/600x800/051427/D4A646?text=SR",
         bio: "Sneha specializes in trademark and copyright law, helping creators and businesses protect their intellectual assets.",
     },
 ];

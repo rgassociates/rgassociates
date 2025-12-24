@@ -73,12 +73,12 @@ export default function FeaturedServices() {
                                         </Badge>
                                     </div>
 
-                                    {/* Icon with Rotation Animation */}
+                                    {/* Icon with Enhanced Rotation Animation */}
                                     <motion.div
                                         className="h-14 w-14 rounded-xl bg-[#D4A646] text-[#051427] flex items-center justify-center shadow-lg mb-6"
                                         whileHover={{
-                                            scale: 1.1,
-                                            rotate: [0, -10, 10, -10, 0],
+                                            scale: 1.2,
+                                            rotate: [0, -15, 15, -15, 0],
                                             transition: { duration: 0.5 }
                                         }}
                                     >
