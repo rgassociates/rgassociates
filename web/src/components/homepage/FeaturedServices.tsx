@@ -73,10 +73,17 @@ export default function FeaturedServices() {
                                         </Badge>
                                     </div>
 
-                                    {/* Icon */}
-                                    <div className="h-14 w-14 rounded-xl bg-[#D4A646] text-[#051427] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform mb-6">
+                                    {/* Icon with Rotation Animation */}
+                                    <motion.div
+                                        className="h-14 w-14 rounded-xl bg-[#D4A646] text-[#051427] flex items-center justify-center shadow-lg mb-6"
+                                        whileHover={{
+                                            scale: 1.1,
+                                            rotate: [0, -10, 10, -10, 0],
+                                            transition: { duration: 0.5 }
+                                        }}
+                                    >
                                         {service.icon}
-                                    </div>
+                                    </motion.div>
 
                                     {/* Title */}
                                     <h3 className="text-2xl font-bold text-[#051427] font-serif mb-3 group-hover:text-[#D4A646] transition-colors">

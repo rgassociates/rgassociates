@@ -97,9 +97,33 @@ export default function HeroSection() {
                 />
             </div>
 
-            {/* Decorative Gradient Blobs */}
-            <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-96 h-96 bg-[#D4A646]/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+            {/* Decorative Gradient Blobs with Floating Animation */}
+            <motion.div
+                className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-96 h-96 bg-[#D4A646]/10 rounded-full blur-3xl"
+                animate={{
+                    y: [0, -30, 0],
+                    x: [0, 20, 0],
+                    scale: [1, 1.1, 1],
+                }}
+                transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+            />
+            <motion.div
+                className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
+                animate={{
+                    y: [0, 30, 0],
+                    x: [0, -20, 0],
+                    scale: [1, 1.15, 1],
+                }}
+                transition={{
+                    duration: 25,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+            />
 
             <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
