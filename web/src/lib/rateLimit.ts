@@ -43,6 +43,28 @@ export const apiLimiter = new Ratelimit({
 });
 
 /**
+ * Rate limiter for admin login attempts
+ * Allows 5 login attempts per 15 minutes per IP
+ */
+export const loginRateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(5, "15 m"),
+    analytics: true,
+    prefix: "@rg-legal/admin-login",
+});
+
+/**
+ * Stricter rate limiter for failed login attempts
+ * Allows only 3 failed attempts per hour per email
+ */
+export const failedLoginRateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(3, "1 h"),
+    analytics: true,
+    prefix: "@rg-legal/failed-login",
+});
+
+/**
  * Helper function to get client IP from headers
  * Works with various hosting providers (Vercel, Cloudflare, etc.)
  */

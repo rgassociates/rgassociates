@@ -42,7 +42,7 @@ const Header = () => {
                     <Link href="/" className="-m-1.5 p-1.5">
                         {/* Logo Image with Smooth Zoom */}
                         <motion.img
-                            src="/logohoribg.png"
+                            src="/rglegalsolutions.webp"
                             alt="RG Legal Solutions Logo"
                             className="h-12 object-contain"
                             whileHover={{

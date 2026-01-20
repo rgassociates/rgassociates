@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-
-import DisclaimerModal from "@/components/DisclaimerModal";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "RG Legal Solutions | Expert legal counsel in Jaipur",
   description:
     "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
-  icons: {
-    icon: '/RGlogowithoutbg.ico',
-    shortcut: '/RGlogowithoutbg.ico',
-    apple: '/RGlogowithoutbg.ico',
-  },
   openGraph: {
     title: "RG Legal Solutions | Expert legal counsel in Jaipur",
     description: "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
@@ -22,7 +12,7 @@ export const metadata: Metadata = {
     siteName: "RG Legal Solutions",
     images: [
       {
-        url: '/RGlogowithoutbg.webp',
+        url: '/rglegalsolutions.webp',
         width: 1200,
         height: 630,
         alt: 'RG Legal Solutions Logo',
@@ -35,7 +25,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "RG Legal Solutions | Expert legal counsel in Jaipur",
     description: "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
-    images: ['/RGlogowithoutbg.webp'],
+    images: ['/rglegalsolutions.webp'],
   },
 };
 
@@ -61,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         )}
         {/* End Google Tag Manager */}
       </head>
-      <body className="antialiased flex flex-col min-h-screen" suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <noscript>
@@ -74,11 +64,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </noscript>
         )}
         {/* End Google Tag Manager (noscript) */}
-        <DisclaimerModal />
-        <WhatsAppButton />
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+
+        {children}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -89,8 +77,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               name: "RG Legal Solutions",
               alternateName: "RG Legal Solutions - Law Firm Jaipur",
               url: "https://www.rglegalsolutions.in",
-              logo: "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
-              image: "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
+              logo: "https://www.rglegalsolutions.in/rglegalsolutions.webp",
+              image: "https://www.rglegalsolutions.in/rglegalsolutions.webp",
               description: "Leading law firm in Jaipur offering expert legal services across civil, criminal, and corporate law. Professional legal consultation, litigation, documentation, and research services.",
               address: {
                 "@type": "PostalAddress",
