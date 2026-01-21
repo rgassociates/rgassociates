@@ -2,7 +2,12 @@
 
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+import '@uiw/react-md-editor/markdown-editor.css';
 import type { Blog } from '@/lib/types/admin';
+import ImageUpload from '@/components/admin/ImageUpload';
+
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
 interface BlogFormProps {
     blog?: Blog;
@@ -155,18 +160,29 @@ export default function BlogForm({ blog, mode }: BlogFormProps) {
 
                 {/* Cover Image */}
                 <div>
-                    <label htmlFor="cover_image" className="block text-sm font-medium text-gray-700 mb-2">
-                        Cover Image URL *
-                    </label>
-                    <input
-                        type="url"
-                        id="cover_image"
-                        required
-                        value={formData.cover_image}
-                        onChange={(e) => setFormData({ ...formData, cover_image: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646] focus:border-transparent"
-                        placeholder="https://example.com/image.jpg"
-                    />
+                    {/* Cover Image Upload & URL */}
+                    <div className="space-y-4">
+                        <ImageUpload
+                            bucket="blogs"
+                            onUploadComplete={(url: string) => setFormData(prev => ({ ...prev, cover_image: url }))}
+                            label="Upload Cover Image"
+                        />
+
+                        <div>
+                            <label htmlFor="cover_image" className="block text-sm font-medium text-gray-700 mb-2">
+                                Cover Image URL *
+                            </label>
+                            <input
+                                type="url"
+                                id="cover_image"
+                                required
+                                readOnly
+                                value={formData.cover_image}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed text-gray-600 focus:ring-0"
+                                placeholder="Image URL will appear here after upload"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Short Description */}
@@ -186,19 +202,18 @@ export default function BlogForm({ blog, mode }: BlogFormProps) {
                 </div>
 
                 {/* Content */}
-                <div>
+                <div data-color-mode="light">
                     <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
-                        Content * <span className="text-xs text-gray-500">(Supports Markdown)</span>
+                        Content *
                     </label>
-                    <textarea
-                        id="content"
-                        required
-                        rows={12}
-                        value={formData.content}
-                        onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646] focus:border-transparent font-mono text-sm"
-                        placeholder="Write your blog content here..."
-                    />
+                    <div className="prose-editor">
+                        <MDEditor
+                            value={formData.content}
+                            onChange={(value: string | undefined) => setFormData({ ...formData, content: value || '' })}
+                            height={400}
+                            preview="edit"
+                        />
+                    </div>
                 </div>
 
                 {/* Published Status */}

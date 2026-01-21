@@ -1,9 +1,5 @@
-import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from './emailConfig';
 import { logger } from './logger';
-
-// Initialize EmailJS with your public key
-emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
 interface EmailParams {
     first_name: string;
@@ -16,7 +12,7 @@ interface EmailParams {
 }
 
 /**
- * Send email notification using EmailJS
+ * Send email notification using Server-Side API (hides secrets)
  * @param params - Email parameters
  * @returns Promise with success/error status
  */
@@ -44,24 +40,32 @@ export const sendEmailNotification = async (params: EmailParams): Promise<{ succ
                 : 'General Inquiry',
         };
 
-        logger.info('📧 Sending email with params:', emailParams);
+        logger.info('📧 Sending email request to server API...', emailParams);
 
-        // Send email via EmailJS
-        const response = await emailjs.send(
-            EMAILJS_CONFIG.SERVICE_ID,
-            EMAILJS_CONFIG.TEMPLATE_ID,
-            emailParams
-        );
+        // Send email via our Next.js API route
+        const response = await fetch('/api/email/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                service_id: EMAILJS_CONFIG.SERVICE_ID,
+                template_id: EMAILJS_CONFIG.TEMPLATE_ID,
+                user_id: EMAILJS_CONFIG.PUBLIC_KEY, // Public key is still needed as user_id
+                template_params: emailParams,
+            }),
+        });
 
-        if (response.status === 200) {
-            logger.info('✅ Email sent successfully:', response);
+        if (response.ok) {
+            logger.info('✅ Email sent successfully via server');
             return { success: true };
         } else {
-            logger.error('❌ Email send failed:', response);
-            return { success: false, error: 'Failed to send email' };
+            const errorData = await response.json();
+            logger.error('❌ Server failed to send email:', errorData);
+            return { success: false, error: errorData.error || 'Failed to send email' };
         }
     } catch (error) {
-        logger.error('❌ EmailJS Error:', error);
+        logger.error('❌ Email Service Error:', error);
         return {
             success: false,
             error: error instanceof Error ? error.message : 'Unknown error occurred'

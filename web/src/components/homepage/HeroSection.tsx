@@ -167,54 +167,49 @@ export default function HeroSection() {
                             <span className="text-white font-semibold">Other Legal Services</span> in Jaipur jurisdiction
                         </motion.p>
 
-                        {/* Key Services - All 6 Categories (Clickable) */}
+                        {/* Key Services - Modern Grid (Clickable Cards) */}
                         <motion.div
-                            className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6"
+                            className="grid grid-cols-2 gap-3 mb-8"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            <a href="/services/legal-consultation" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
-                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm font-medium">Legal Consultation</span>
-                            </a>
+                            {[
+                                { text: "Legal Consultation", href: "/services/legal-consultation" },
+                                { text: "Legal Notice", href: "/services/legal-notice" },
+                                { text: "Legal Research", href: "/services/legal-research" },
+                                { text: "Title Search Report", href: "/services/title-search-report" },
+                                { text: "Document Registration", href: "/services/document-registration" },
+                                { text: "Litigation", href: "/services/litigation" },
+                            ].map((item, index) => (
+                                <a
+                                    key={index}
+                                    href={item.href}
+                                    className="group relative flex items-center gap-3 p-3 pl-4 rounded-xl bg-white/5 border border-white/10 overflow-hidden hover:bg-white/10 hover:border-[#D4A646]/50 hover:shadow-[0_0_15px_rgba(212,166,70,0.15)] transition-all duration-300"
+                                >
+                                    {/* Hover Shine Effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#D4A646]/0 via-[#D4A646]/5 to-[#D4A646]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
 
-                            <a href="/services/legal-notice" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
-                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm font-medium">Legal Notice</span>
-                            </a>
+                                    {/* Icon Container */}
+                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#D4A646]/10 flex items-center justify-center border border-[#D4A646]/20 group-hover:scale-110 group-hover:bg-[#D4A646] transition-all duration-300">
+                                        <svg className="w-4 h-4 text-[#D4A646] group-hover:text-[#051427] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
 
-                            <a href="/services/litigation" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
-                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm font-medium">Litigation (Jaipur)</span>
-                            </a>
+                                    {/* Text */}
+                                    <span className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors">
+                                        {item.text}
+                                    </span>
 
-                            <a href="/services/legal-research" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
-                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm font-medium">Legal Research</span>
-                            </a>
-
-                            <a href="/services/title-search-report" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
-                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm font-medium">Title Search & Due Diligence</span>
-                            </a>
-
-                            <a href="/services/document-registration" className="flex items-center gap-2 text-gray-300 hover:text-[#D4A646] transition-colors group">
-                                <svg className="w-5 h-5 text-[#D4A646] flex-shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm font-medium">Document Registration (Jaipur)</span>
-                            </a>
+                                    {/* Chevron Arrow */}
+                                    <div className="ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-1">
+                                        <svg className="w-4 h-4 text-[#D4A646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            ))}
                         </motion.div>
 
                         {/* CTAs */}

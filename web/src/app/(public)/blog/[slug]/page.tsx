@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
 import { supabase, BlogPost } from '@/lib/supabase';
 
 type Props = {
@@ -207,8 +208,9 @@ export default async function BlogDetailPage({ params }: Props) {
             prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
             prose-ol:my-6 prose-ol:list-decimal prose-ol:pl-6
             prose-li:text-gray-700 prose-li:mb-2"
-                    dangerouslySetInnerHTML={{ __html: blog.content }}
-                />
+                >
+                    <ReactMarkdown>{blog.content}</ReactMarkdown>
+                </div>
 
                 {/* Back to Blog */}
                 <div className="mt-16 pt-8 border-t border-gray-200">

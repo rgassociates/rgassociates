@@ -3,16 +3,27 @@
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { getHoneypotProps, isBot } from '@/lib/honeypot';
 
 export default function AdminLoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [website, setWebsite] = useState(''); // Honeypot field
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // Check for bot submission
+        if (isBot(website)) {
+            console.log("Bot detected via honeypot");
+            // Fail silently or show generic error
+            setError('Invalid submission due to bot behavior detection.');
+            return;
+        }
+
         setError('');
         setLoading(true);
 
@@ -110,6 +121,13 @@ export default function AdminLoginPage() {
                                 disabled={loading}
                             />
                         </div>
+
+                        {/* Honeypot field - invisible to users, visible to bots */}
+                        <input
+                            {...getHoneypotProps()}
+                            value={website}
+                            onChange={(e) => setWebsite(e.target.value)}
+                        />
 
                         {/* Submit Button */}
                         <div>
