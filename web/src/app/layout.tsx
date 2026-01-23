@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.rglegalsolutions.in'),
   title: "RG Legal Solutions | Expert legal counsel in Jaipur",
   description:
     "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
+  icons: {
+    icon: '/RGlogowithoutbg.ico',
+    shortcut: '/RGlogowithoutbg.ico',
+    apple: '/RGlogowithoutbg.ico',
+  },
   openGraph: {
     title: "RG Legal Solutions | Expert legal counsel in Jaipur",
     description: "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
@@ -12,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "RG Legal Solutions",
     images: [
       {
-        url: '/rglegalsolutions.webp',
+        url: '/RGlogowithoutbg.webp',
         width: 1200,
         height: 630,
         alt: 'RG Legal Solutions Logo',
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "RG Legal Solutions | Expert legal counsel in Jaipur",
     description: "RG Legal Solutions provides expert legal services across civil, criminal, and corporate law. Committed to integrity and excellence.",
-    images: ['/rglegalsolutions.webp'],
+    images: ['/RGlogowithoutbg.webp'],
   },
 };
 

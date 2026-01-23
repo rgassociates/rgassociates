@@ -1,9 +1,24 @@
 import { MetadataRoute } from 'next';
 import { serviceCategories } from '@/data/serviceCategories';
 import { allSubServices } from '@/data/subServices';
+import { getServerClient } from '@/lib/supabaseServer';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.rglegalsolutions.in';
+    const supabase = getServerClient();
+
+    // Fetch all published blog posts
+    const { data: posts } = await supabase
+        .from('blogs')
+        .select('slug, updated_at')
+        .eq('is_published', true);
+
+    const blogPages = (posts || []).map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post.updated_at),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+    }));
 
     // Homepage
     const homepage = {
@@ -77,6 +92,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         servicesHub,
         ...categoryPages,
         ...servicePages,
+        ...blogPages, // Add dynamic blog pages
         ...otherPages,
     ];
 }
