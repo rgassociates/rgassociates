@@ -90,6 +90,11 @@ export function getClientIP(headers: Headers): string {
     return "unknown";
 }
 
+// In-memory fallback for when Redis is unavailable
+const memoryStore = new Map<string, { count: number; resetTime: number }>();
+const FALLBACK_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const FALLBACK_LIMIT = 5; // 5 requests per window
+
 /**
  * Check rate limit and return appropriate response
  * @param identifier - Unique identifier (usually IP address)
@@ -129,14 +134,45 @@ export async function checkRateLimit(
             reset,
         };
     } catch (error) {
-        // Log error but don't block the request if rate limiting fails
-        console.error("Rate limiting error:", error);
+        // While Redis is down, we use a simple in-memory fallback
+        console.warn("Redis rate limiting failed, switching to in-memory fallback:", error);
 
-        // In production, you might want to fail open (allow the request)
-        // or fail closed (deny the request) based on your security requirements
+        const now = Date.now();
+        const record = memoryStore.get(identifier);
+
+        // Clean up expired entry or create new one
+        if (!record || now > record.resetTime) {
+            memoryStore.set(identifier, {
+                count: 1,
+                resetTime: now + FALLBACK_WINDOW_MS
+            });
+            return {
+                success: true,
+                limit: FALLBACK_LIMIT,
+                remaining: FALLBACK_LIMIT - 1,
+                reset: now + FALLBACK_WINDOW_MS
+            };
+        }
+
+        // Check limit
+        if (record.count >= FALLBACK_LIMIT) {
+            const minutesUntilReset = Math.ceil((record.resetTime - now) / 60000);
+            return {
+                success: false,
+                error: `Rate limit exceeded. Please try again in ${minutesUntilReset} minute${minutesUntilReset > 1 ? 's' : ''}.`,
+                limit: FALLBACK_LIMIT,
+                remaining: 0,
+                reset: record.resetTime
+            };
+        }
+
+        // Increment count
+        record.count += 1;
         return {
-            success: true, // Fail open - allow request if rate limiting service is down
-            error: "Rate limiting service unavailable",
+            success: true,
+            limit: FALLBACK_LIMIT,
+            remaining: FALLBACK_LIMIT - record.count,
+            reset: record.resetTime
         };
     }
 }

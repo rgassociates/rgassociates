@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getServerClient } from '@/lib/supabaseServer';
 
 export const metadata: Metadata = {
     title: "Our Attorneys | RG Legal Solutions",
@@ -8,42 +9,24 @@ export const metadata: Metadata = {
         "Meet the expert legal team at RG Legal Solutions. Our experienced attorneys specialize in civil litigation, criminal defense, corporate law, and more.",
 };
 
-const attorneys = [
-    {
-        id: 1,
-        name: "Rajesh Gupta",
-        role: "Senior Partner",
-        specialization: "Corporate Law & Civil Litigation",
-        image: "https://placehold.co/600x800/051427/D4A646?text=RG",
-        bio: "With over 25 years of experience, Rajesh leads the firm's corporate practice, advising major conglomerates on mergers and compliance.",
-    },
-    {
-        id: 2,
-        name: "Priya Sharma",
-        role: "Partner",
-        specialization: "Family Law & Mediation",
-        image: "https://placehold.co/600x800/051427/D4A646?text=PS",
-        bio: "Priya is a compassionate advocate known for her expertise in complex family disputes and successful mediation strategies.",
-    },
-    {
-        id: 3,
-        name: "Amit Verma",
-        role: "Senior Associate",
-        specialization: "Criminal Defense",
-        image: "https://placehold.co/600x800/051427/D4A646?text=AV",
-        bio: "Amit is a tenacious litigator with a strong track record in defending clients against serious criminal charges.",
-    },
-    {
-        id: 4,
-        name: "Sneha Reddy",
-        role: "Associate",
-        specialization: "Intellectual Property",
-        image: "https://placehold.co/600x800/051427/D4A646?text=SR",
-        bio: "Sneha specializes in trademark and copyright law, helping creators and businesses protect their intellectual assets.",
-    },
-];
+// Revalidate data every hour (3600 seconds) or use 0 for always fresh
+export const revalidate = 0;
 
-export default function Attorneys() {
+export default async function Attorneys() {
+    const supabase = getServerClient();
+
+    const { data: attorneys, error } = await supabase
+        .from('attorneys')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .order('name', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching attorneys:', error);
+    }
+
+    const teamMembers = attorneys || [];
+
     return (
         <div className="bg-white">
             {/* Hero Section - Modern Design */}
@@ -64,7 +47,7 @@ export default function Attorneys() {
                             <span className="text-sm font-semibold text-[#D4A646] uppercase tracking-wider">Our Team</span>
                         </div>
                         <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl font-serif mb-6">
-                            Meet Our Attorneys
+                            Meet Our Attorneys & Team
                         </h1>
                         <p className="text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
                             A team of dedicated legal professionals committed to excellence and your success.
@@ -84,17 +67,23 @@ export default function Attorneys() {
             <section className="py-24 sm:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                        {attorneys.map((person) => (
+                        {teamMembers.map((person) => (
                             <div
                                 key={person.id}
                                 className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
                             >
                                 <div className="aspect-[3/4] w-full overflow-hidden bg-gray-200 relative">
-                                    <img
-                                        src={person.image}
-                                        alt={person.name}
-                                        className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-110"
-                                    />
+                                    {person.image_url ? (
+                                        <img
+                                            src={person.image_url}
+                                            alt={person.name}
+                                            className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-110"
+                                        />
+                                    ) : (
+                                        <div className="h-full w-full flex items-center justify-center bg-[#D4A646]/10 text-[#D4A646] font-bold text-4xl">
+                                            {person.name.charAt(0)}
+                                        </div>
+                                    )}
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#051427]/90 via-[#051427]/40 to-transparent" />
                                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                                         <p className="text-sm font-medium text-[#D4A646] uppercase tracking-wider mb-1">{person.role}</p>
@@ -105,6 +94,12 @@ export default function Attorneys() {
                                     <p className="text-sm font-semibold text-[#051427] mb-3">{person.specialization}</p>
                                     <p className="text-sm leading-6 text-gray-600 line-clamp-3 mb-4">{person.bio}</p>
                                     <div className="pt-4 border-t border-gray-100">
+                                        {/* 
+                                         * Note: If you want a detail page for each attorney, create a route at 
+                                         * /attorneys/[id] and link to it here. For now, we can link to the 
+                                         * same page (anchor) or a "contact" page, or remove the link if no detail page.
+                                         * Keeping the link as requested, assuming you might add detail page later.
+                                         */}
                                         <Link href={`/attorneys/${person.id}`} className="text-sm font-semibold text-[#051427] hover:text-[#D4A646] transition-colors flex items-center gap-2 group">
                                             View Profile
                                             <svg className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

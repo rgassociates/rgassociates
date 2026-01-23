@@ -2,8 +2,38 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
+interface Attorney {
+    id: string;
+    name: string;
+    role: string;
+    specialization: string;
+    image_url?: string;
+    bio?: string;
+}
 
 export default function About() {
+    const [attorneys, setAttorneys] = useState<Attorney[]>([]);
+
+    useEffect(() => {
+        const fetchAttorneys = async () => {
+            const { data } = await supabase
+                .from('attorneys')
+                .select('*')
+                .order('display_order', { ascending: true })
+                .order('name', { ascending: true })
+                .limit(3);
+
+            if (data) {
+                setAttorneys(data);
+            }
+        };
+
+        fetchAttorneys();
+    }, []);
+
     return (
         <div className="bg-white">
             {/* Hero Section - Modern Design */}
@@ -116,58 +146,68 @@ export default function About() {
             </section>
 
             {/* Team Section */}
-            <section className="relative bg-gradient-to-br from-gray-50 to-white py-24 sm:py-32 border-t border-gray-200">
-                <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div className="mx-auto max-w-2xl text-center mb-16">
-                        <h2 className="text-4xl font-bold tracking-tight text-[#051427] sm:text-5xl font-serif mb-6">
-                            Meet Our Team
-                        </h2>
-                        <p className="text-lg leading-8 text-gray-600">
-                            Dedicated professionals committed to your success.
-                        </p>
-                    </div>
+            {attorneys.length > 0 && (
+                <section className="relative bg-gradient-to-br from-gray-50 to-white py-24 sm:py-32 border-t border-gray-200">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                        <div className="mx-auto max-w-2xl text-center mb-16">
+                            <h2 className="text-4xl font-bold tracking-tight text-[#051427] sm:text-5xl font-serif mb-6">
+                                Meet Our Team
+                            </h2>
+                            <p className="text-lg leading-8 text-gray-600">
+                                Dedicated professionals committed to your success.
+                            </p>
+                        </div>
 
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                        {[1, 2, 3].map((item, index) => (
-                            <motion.div
-                                key={item}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.6 }}
-                                className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                            {attorneys.map((person, index) => (
+                                <motion.div
+                                    key={person.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1, duration: 0.6 }}
+                                    className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                                >
+                                    <div className="flex items-center gap-6 mb-4">
+                                        <div className="h-20 w-20 rounded-full bg-gray-200 overflow-hidden relative flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            {person.image_url ? (
+                                                <img
+                                                    src={person.image_url}
+                                                    alt={person.name}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="h-full w-full flex items-center justify-center bg-[#D4A646]/10 text-[#D4A646] font-bold text-2xl">
+                                                    {person.name.charAt(0)}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-bold text-[#051427] font-serif">{person.name}</h3>
+                                            <p className="text-sm font-semibold text-[#D4A646]">{person.role}</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-600 leading-relaxed line-clamp-3">
+                                        {person.bio || person.specialization}
+                                    </p>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        <div className="mt-16 text-center">
+                            <Link
+                                href="/attorneys"
+                                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#051427] px-8 py-4 text-base font-semibold text-[#051427] hover:bg-[#051427] hover:text-white transition-all duration-300"
                             >
-                                <div className="flex items-center gap-6 mb-4">
-                                    <div className="h-20 w-20 rounded-full bg-gradient-to-br from-[#D4A646]/20 to-[#D4A646]/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                        <svg className="h-10 w-10 text-[#D4A646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-[#051427] font-serif">Attorney Name</h3>
-                                        <p className="text-sm font-semibold text-[#D4A646]">Senior Partner</p>
-                                    </div>
-                                </div>
-                                <p className="text-gray-600 leading-relaxed">
-                                    Specializing in corporate law with over 15 years of experience.
-                                </p>
-                            </motion.div>
-                        ))}
+                                View All Attorneys & Team
+                                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </Link>
+                        </div>
                     </div>
-
-                    <div className="mt-16 text-center">
-                        <Link
-                            href="/attorneys"
-                            className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#051427] px-8 py-4 text-base font-semibold text-[#051427] hover:bg-[#051427] hover:text-white transition-all duration-300"
-                        >
-                            View All Attorneys
-                            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
-                    </div>
-                </div>
-            </section>
+                </section>
+            )}
         </div>
     );
 }

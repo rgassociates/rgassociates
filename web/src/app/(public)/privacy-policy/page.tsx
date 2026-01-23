@@ -82,8 +82,8 @@ export default function PrivacyPolicy() {
                     <p className="mt-2">
                         <strong>RG Legal Solutions</strong><br />
                         Vatsalya 2 Complex, NRI Circle, Sanganer, Pratap Nagar, Jaipur, Rajasthan 302033<br />
-                        Email: <a href="mailto:rgassociatesjaipur@gmail.com" className="text-[#D4A646] hover:underline">rgassociatesjaipur@gmail.com</a><br />
-                        Phone: <a href="tel:09309212401" className="text-[#D4A646] hover:underline">093092 12401</a>
+                        Email: <a href="mailto:info@rglegalsolutions.in" className="text-[#D4A646] hover:underline">info@rglegalsolutions.in</a><br />
+                        Phone: <a href="tel:09309212401" className="text-[#D4A646] hover:underline">+91-9309212401</a>
                     </p>
                 </div>
             </div>

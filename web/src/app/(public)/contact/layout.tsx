@@ -47,7 +47,7 @@ export default function ContactLayout({
         "logo": "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
         "url": "https://www.rglegalsolutions.in",
         "telephone": "+919309212401",
-        "email": "rgassociatesjaipur@gmail.com",
+        "email": "info@rglegalsolutions.in",
         "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",

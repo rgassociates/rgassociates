@@ -19,6 +19,7 @@ export default function AdminNav({ user, children }: AdminNavProps) {
     const navigation = [
         { name: 'Dashboard', href: '/admin', icon: '📊' },
         { name: 'Manage Blogs', href: '/admin/blogs', icon: '📝' },
+        { name: 'Manage Attorneys', href: '/admin/attorneys', icon: '👨‍⚖️' },
         { name: 'View Contacts', href: '/admin/contacts', icon: '📧' },
     ];
 
@@ -52,8 +53,8 @@ export default function AdminNav({ user, children }: AdminNavProps) {
                             href={item.href}
                             onClick={() => setSidebarOpen(false)}
                             className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${isActive
-                                    ? 'bg-[#D4A646] text-white shadow-md transform scale-105'
-                                    : 'text-gray-600 hover:bg-gray-50 hover:text-[#D4A646]'
+                                ? 'bg-[#D4A646] text-white shadow-md transform scale-105'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-[#D4A646]'
                                 }`}
                         >
                             <span className={`mr-3 text-lg ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-[#D4A646]'}`}>

@@ -25,7 +25,7 @@ export default function ServiceSchema({ service, categoryTitle, categorySlug }: 
                 "addressCountry": "IN"
             },
             "telephone": "+91-9309212401",
-            "email": "rgassociatesjaipur@gmail.com",
+            "email": "info@rglegalsolutions.in",
             "url": "https://rglegalsolutions.in"
         },
         "serviceType": categoryTitle,

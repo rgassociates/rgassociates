@@ -123,7 +123,7 @@ export default function FinalCTA() {
                             <span className="font-medium">WhatsApp</span>
                         </a>
                         <a
-                            href="mailto:rgassociatesjaipur@gmail.com"
+                            href="mailto:info@rglegalsolutions.in"
                             className="flex items-center gap-2 hover:text-[#D4A646] transition-colors group"
                         >
                             <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#D4A646] transition-colors">

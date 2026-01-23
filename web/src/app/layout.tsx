@@ -97,7 +97,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 "@type": "ContactPoint",
                 telephone: "+919309212401",
                 contactType: "customer service",
-                email: "rgassociatesjaipur@gmail.com",
+                email: "info@rglegalsolutions.in",
                 areaServed: "IN",
                 availableLanguage: ["English", "Hindi"],
               },
