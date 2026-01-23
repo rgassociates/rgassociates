@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     
     const { data, error } = await resend.emails.send({
       from: 'RG Legal <noreply@rglegalsolutions.in>',
-      to: 'rgassociatesjaipur@gmail.com',
+      to: 'info@rglegalsolutions.in',
       subject: `New ${body.formType} Submission`,
       html: `...`,
     });

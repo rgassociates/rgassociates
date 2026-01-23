@@ -323,7 +323,7 @@ export async function POST(request: NextRequest) {
     // Send email
     const { data, error } = await resend.emails.send({
       from: 'RG Legal Solutions <noreply@rglegalsolutions.in>',
-      to: 'rgassociatesjaipur@gmail.com',
+      to: 'info@rglegalsolutions.in',
       subject: `New ${body.formType} Form Submission`,
       html: `...`,
     });

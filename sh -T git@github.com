@@ -10,4 +10,4 @@ branch.main.remote=origin
 branch.main.vscode-merge-base=origin/main
 branch.main.merge=refs/heads/main
 user.name=rgassociates
-user.email=rgassociatesjaipur@gmail.com
+user.email=info@rglegalsolutions.in
