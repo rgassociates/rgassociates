@@ -142,8 +142,10 @@ if (typeof window === 'undefined') {
         console.error(error);
         // In development, we want to see the error
         // In production, this will prevent the app from starting
-        if (env.nodeEnv === 'production') {
-            process.exit(1);
+        if (env.nodeEnv === 'development') {
+            console.error('❌ Environment validation failed. Please check your .env.local file.');
         }
+        // In production, we just throw so Next.js can show the error page
+        throw error;
     }
 }
