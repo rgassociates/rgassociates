@@ -1,82 +1,40 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import type { Blog } from '@/lib/types/admin';
+import { requireAdmin } from '@/lib/auth/admin-auth';
+import { getServerClient } from '@/lib/supabaseServer';
+import { BlogsFilters, TogglePublishButton, DeleteBlogButton } from './ClientComponents';
 
-export default function BlogsPage() {
-    const router = useRouter();
-    const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState<'all' | 'published' | 'draft'>('all');
-    const [search, setSearch] = useState('');
-    const [deleteId, setDeleteId] = useState<string | null>(null);
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-    useEffect(() => {
-        fetchBlogs();
-    }, [filter, search]);
+export default async function BlogsPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ search?: string; status?: string }>;
+}) {
+    // Ensure user is admin
+    await requireAdmin();
 
-    const fetchBlogs = async () => {
-        setLoading(true);
-        try {
-            const params = new URLSearchParams();
-            if (filter !== 'all') params.append('status', filter);
-            if (search) params.append('search', search);
+    const resolvedParams = await searchParams;
+    const search = resolvedParams.search || '';
+    const status = resolvedParams.status || 'all';
 
-            const response = await fetch(`/api/admin/blogs?${params}`);
-            const data = await response.json();
+    const supabase = getServerClient();
 
-            if (response.ok) {
-                setBlogs(data.blogs || []);
-            }
-        } catch (error) {
-            console.error('Error fetching blogs:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    let query = supabase
+        .from('blogs')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this blog?')) return;
+    if (status !== 'all') {
+        const isPublished = status === 'published';
+        query = query.eq('is_published', isPublished);
+    }
 
-        setDeleteId(id);
-        try {
-            const response = await fetch(`/api/admin/blogs/${id}`, {
-                method: 'DELETE',
-            });
+    if (search) {
+        query = query.or(`title.ilike.%${search}%,slug.ilike.%${search}%,author.ilike.%${search}%`);
+    }
 
-            if (response.ok) {
-                setBlogs(blogs.filter(b => b.id !== id));
-            } else {
-                alert('Failed to delete blog');
-            }
-        } catch (error) {
-            console.error('Error deleting blog:', error);
-            alert('An error occurred');
-        } finally {
-            setDeleteId(null);
-        }
-    };
-
-    const handleTogglePublish = async (blog: Blog) => {
-        try {
-            const response = await fetch(`/admin/blogs/${blog.id}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ is_published: !blog.is_published }),
-            });
-
-            if (response.ok) {
-                fetchBlogs();
-            } else {
-                alert('Failed to update blog status');
-            }
-        } catch (error) {
-            console.error('Error updating blog:', error);
-            alert('An error occurred');
-        }
-    };
+    const { data: blogs, error } = await query;
 
     return (
         <div className="space-y-6">
@@ -98,62 +56,17 @@ export default function BlogsPage() {
             </div>
 
             {/* Filters */}
-            <div className="bg-white rounded-xl shadow-md p-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                    {/* Search */}
-                    <div className="flex-1">
-                        <input
-                            type="text"
-                            placeholder="Search blogs..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646] focus:border-transparent"
-                        />
-                    </div>
-
-                    {/* Status Filter */}
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => setFilter('all')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'all'
-                                    ? 'bg-[#D4A646] text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            All
-                        </button>
-                        <button
-                            onClick={() => setFilter('published')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'published'
-                                    ? 'bg-green-500 text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            Published
-                        </button>
-                        <button
-                            onClick={() => setFilter('draft')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'draft'
-                                    ? 'bg-orange-500 text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            Drafts
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <BlogsFilters />
 
             {/* Blogs Table */}
             <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                {loading ? (
-                    <div className="p-8 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#D4A646]"></div>
-                        <p className="mt-2 text-gray-600">Loading blogs...</p>
+                {error ? (
+                    <div className="p-8 text-center text-red-500">
+                        Error loading blogs: {error.message}
                     </div>
-                ) : blogs.length === 0 ? (
-                    <div className="p-8 text-center">
-                        <p className="text-gray-600">No blogs found</p>
+                ) : !blogs || blogs.length === 0 ? (
+                    <div className="p-8 text-center text-gray-600">
+                        No blogs found
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
@@ -170,7 +83,7 @@ export default function BlogsPage() {
                                         Status
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Published
+                                        Date
                                     </th>
                                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Actions
@@ -198,30 +111,20 @@ export default function BlogsPage() {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {new Date(blog.published_at).toLocaleDateString()}
+                                            {blog.published_at 
+                                                ? new Date(blog.published_at).toLocaleDateString() 
+                                                : new Date(blog.created_at).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div className="flex items-center justify-end gap-2">
-                                                <button
-                                                    onClick={() => handleTogglePublish(blog)}
-                                                    className="text-blue-600 hover:text-blue-900"
-                                                    title={blog.is_published ? 'Unpublish' : 'Publish'}
-                                                >
-                                                    {blog.is_published ? '👁️' : '📝'}
-                                                </button>
+                                                <TogglePublishButton id={blog.id} isPublished={blog.is_published} />
                                                 <Link
                                                     href={`/admin/blogs/${blog.id}`}
                                                     className="text-indigo-600 hover:text-indigo-900"
                                                 >
                                                     Edit
                                                 </Link>
-                                                <button
-                                                    onClick={() => handleDelete(blog.id)}
-                                                    disabled={deleteId === blog.id}
-                                                    className="text-red-600 hover:text-red-900 disabled:opacity-50"
-                                                >
-                                                    {deleteId === blog.id ? 'Deleting...' : 'Delete'}
-                                                </button>
+                                                <DeleteBlogButton id={blog.id} />
                                             </div>
                                         </td>
                                     </tr>

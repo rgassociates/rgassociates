@@ -1,89 +1,39 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { ContactSubmission } from '@/lib/types/admin';
+import { requireAdmin } from '@/lib/auth/admin-auth';
+import { getServerClient } from '@/lib/supabaseServer';
+import { ContactsFilters, ContactStatusSelect, DeleteContactButton } from './ClientComponents';
 
-export default function ContactsPage() {
-    const [contacts, setContacts] = useState<ContactSubmission[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState<'all' | 'new' | 'read' | 'resolved'>('all');
-    const [search, setSearch] = useState('');
-    const [deleteId, setDeleteId] = useState<string | null>(null);
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-    useEffect(() => {
-        fetchContacts();
-    }, [filter, search]);
+export default async function ContactsPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ search?: string; status?: string }>;
+}) {
+    // Ensure user is admin
+    await requireAdmin();
 
-    const fetchContacts = async () => {
-        setLoading(true);
-        try {
-            const params = new URLSearchParams();
-            if (filter !== 'all') params.append('status', filter);
-            if (search) params.append('search', search);
+    const resolvedParams = await searchParams;
+    const search = resolvedParams.search || '';
+    const status = resolvedParams.status || 'all';
 
-            const response = await fetch(`/api/admin/contacts?${params}`);
-            const data = await response.json();
+    const supabase = getServerClient();
 
-            if (response.ok) {
-                setContacts(data.contacts || []);
-            }
-        } catch (error) {
-            console.error('Error fetching contacts:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    let query = supabase
+        .from('contact_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this contact submission?')) return;
+    if (status !== 'all') {
+        query = query.eq('status', status);
+    }
 
-        setDeleteId(id);
-        try {
-            const response = await fetch(`/api/admin/contacts/${id}`, {
-                method: 'DELETE',
-            });
+    if (search) {
+        query = query.or(`first_name.ilike.%${search}%,last_name.ilike.%${search}%,email.ilike.%${search}%`);
+    }
 
-            if (response.ok) {
-                setContacts(contacts.filter(c => c.id !== id));
-            } else {
-                alert('Failed to delete contact');
-            }
-        } catch (error) {
-            console.error('Error deleting contact:', error);
-            alert('An error occurred');
-        } finally {
-            setDeleteId(null);
-        }
-    };
-
-    const handleUpdateStatus = async (id: string, status: string) => {
-        try {
-            const response = await fetch(`/api/admin/contacts/${id}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status }),
-            });
-
-            if (response.ok) {
-                fetchContacts();
-            } else {
-                alert('Failed to update contact status');
-            }
-        } catch (error) {
-            console.error('Error updating contact:', error);
-            alert('An error occurred');
-        }
-    };
-
-    const getStatusBadge = (status: string) => {
-        const styles = {
-            new: 'bg-orange-100 text-orange-800',
-            read: 'bg-blue-100 text-blue-800',
-            resolved: 'bg-green-100 text-green-800',
-        };
-        return styles[status as keyof typeof styles] || 'bg-gray-100 text-gray-800';
-    };
+    const { data: contacts, error } = await query;
 
     return (
         <div className="space-y-6">
@@ -94,71 +44,17 @@ export default function ContactsPage() {
             </div>
 
             {/* Filters */}
-            <div className="bg-white rounded-xl shadow-md p-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                    {/* Search */}
-                    <div className="flex-1">
-                        <input
-                            type="text"
-                            placeholder="Search by name or email..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646] focus:border-transparent"
-                        />
-                    </div>
-
-                    {/* Status Filter */}
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => setFilter('all')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'all'
-                                    ? 'bg-[#D4A646] text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            All
-                        </button>
-                        <button
-                            onClick={() => setFilter('new')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'new'
-                                    ? 'bg-orange-500 text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            New
-                        </button>
-                        <button
-                            onClick={() => setFilter('read')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'read'
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            Read
-                        </button>
-                        <button
-                            onClick={() => setFilter('resolved')}
-                            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === 'resolved'
-                                    ? 'bg-green-500 text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            Resolved
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <ContactsFilters />
 
             {/* Contacts Table */}
             <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                {loading ? (
-                    <div className="p-8 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#D4A646]"></div>
-                        <p className="mt-2 text-gray-600">Loading contacts...</p>
+                {error ? (
+                    <div className="p-8 text-center text-red-500">
+                        Error loading contacts: {error.message}
                     </div>
-                ) : contacts.length === 0 ? (
-                    <div className="p-8 text-center">
-                        <p className="text-gray-600">No contact submissions found</p>
+                ) : !contacts || contacts.length === 0 ? (
+                    <div className="p-8 text-center text-gray-600">
+                        No contact submissions found
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
@@ -203,15 +99,7 @@ export default function ContactsPage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <select
-                                                value={contact.status}
-                                                onChange={(e) => handleUpdateStatus(contact.id, e.target.value)}
-                                                className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusBadge(contact.status)} border-0 cursor-pointer`}
-                                            >
-                                                <option value="new">New</option>
-                                                <option value="read">Read</option>
-                                                <option value="resolved">Resolved</option>
-                                            </select>
+                                            <ContactStatusSelect id={contact.id} currentStatus={contact.status} />
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {new Date(contact.created_at).toLocaleDateString()}
@@ -224,13 +112,7 @@ export default function ContactsPage() {
                                                 >
                                                     View
                                                 </Link>
-                                                <button
-                                                    onClick={() => handleDelete(contact.id)}
-                                                    disabled={deleteId === contact.id}
-                                                    className="text-red-600 hover:text-red-900 disabled:opacity-50"
-                                                >
-                                                    {deleteId === contact.id ? 'Deleting...' : 'Delete'}
-                                                </button>
+                                                <DeleteContactButton id={contact.id} />
                                             </div>
                                         </td>
                                     </tr>
