@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { getServerClient } from '@/lib/supabaseServer';
 import type { AdminUser } from '@/lib/types/admin';
 
@@ -125,7 +126,7 @@ export async function requireAdmin(): Promise<AdminUser> {
     const admin = await getCurrentAdmin();
 
     if (!admin) {
-        throw new Error('Unauthorized');
+        redirect('/admin/login');
     }
 
     return admin;
