@@ -87,19 +87,19 @@ export async function signOutAdmin() {
 export async function getCurrentAdmin(): Promise<AdminUser | null> {
     const supabase = await createAdminClient();
 
-    // Get current session
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
-    if (sessionError || !session?.user) {
+    // Get current user (more secure than getSession() for server-side)
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+ 
+    if (userError || !user) {
         return null;
     }
-
+ 
     // Get admin user details using service role (bypasses RLS)
     const serverClient = getServerClient();
     const { data: adminUser, error: adminError } = await serverClient
         .from('admin_users')
         .select('*')
-        .eq('auth_user_id', session.user.id)
+        .eq('auth_user_id', user.id)
         .eq('is_active', true)
         .single();
 
