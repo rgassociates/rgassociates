@@ -86,29 +86,38 @@ export async function signOutAdmin() {
  * Get current admin user from session
  */
 export async function getCurrentAdmin(): Promise<AdminUser | null> {
-    const supabase = await createAdminClient();
+    try {
+        const supabase = await createAdminClient();
 
-    // Get current user (more secure than getSession() for server-side)
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
- 
-    if (userError || !user) {
+        // Get current user (more secure than getSession() for server-side)
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+        if (userError || !user) {
+            if (userError) {
+                console.warn('Admin Auth: No user session found or error:', userError.message);
+            }
+            return null;
+        }
+    
+        // Get admin user details using service role (bypasses RLS)
+        const serverClient = getServerClient();
+        const { data: adminUser, error: adminError } = await serverClient
+            .from('admin_users')
+            .select('*')
+            .eq('auth_user_id', user.id)
+            .eq('is_active', true)
+            .single();
+
+        if (adminError || !adminUser) {
+            console.error('Admin Auth: Admin user details not found for auth ID:', user.id, adminError?.message);
+            return null;
+        }
+
+        return adminUser as AdminUser;
+    } catch (err) {
+        console.error('Admin Auth: Unexpected error in getCurrentAdmin:', err);
         return null;
     }
- 
-    // Get admin user details using service role (bypasses RLS)
-    const serverClient = getServerClient();
-    const { data: adminUser, error: adminError } = await serverClient
-        .from('admin_users')
-        .select('*')
-        .eq('auth_user_id', user.id)
-        .eq('is_active', true)
-        .single();
-
-    if (adminError || !adminUser) {
-        return null;
-    }
-
-    return adminUser as AdminUser;
 }
 
 /**
