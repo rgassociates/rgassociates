@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-async function getAttorney(id: string): Promise<Attorney | null> {
+async function getAttorney(id: string): Promise<{ attorney: Attorney | null, error: any }> {
     const supabase = getServerClient();
 
     const { data: attorney, error } = await supabase
@@ -18,10 +18,10 @@ async function getAttorney(id: string): Promise<Attorney | null> {
 
     if (error || !attorney) {
         console.error('Error fetching attorney for edit:', error);
-        return null;
+        return { attorney: null, error };
     }
 
-    return attorney as Attorney;
+    return { attorney: attorney as Attorney, error: null };
 }
 
 export default async function EditAttorneyPage({
@@ -35,10 +35,16 @@ export default async function EditAttorneyPage({
     const resolvedParams = await params;
     const { id } = resolvedParams;
 
-    const attorney = await getAttorney(id);
+    const { attorney, error } = await getAttorney(id);
 
     if (!attorney) {
-        notFound();
+        return (
+            <div className="p-8 text-center text-red-500">
+                <h1>Error Loading Attorney</h1>
+                <p>ID: {id}</p>
+                <p>Error details: {JSON.stringify(error)}</p>
+            </div>
+        );
     }
  
     return <EditAttorneyForm attorney={attorney} />;
