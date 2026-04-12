@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "https://www.rglegalsolutions.in/og-image.jpg",
+                url: "/RGlogowithoutbg.webp",
                 width: 1200,
                 height: 630,
                 alt: "RG Legal Solutions - Expert Legal Services in Jaipur",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "RG Legal Solutions | Expert Legal Services in Jaipur",
         description: "Leading law firm offering comprehensive legal services. 500+ successful cases. Expert consultation, litigation, and documentation services.",
-        images: ["https://www.rglegalsolutions.in/og-image.jpg"],
+        images: ["/RGlogowithoutbg.webp"],
     },
     robots: {
         index: true,

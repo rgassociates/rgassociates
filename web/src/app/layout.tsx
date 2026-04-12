@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         {/* Google Tag Manager */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
@@ -83,8 +83,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               name: "RG Legal Solutions",
               alternateName: "RG Legal Solutions - Law Firm Jaipur",
               url: "https://www.rglegalsolutions.in",
-              logo: "https://www.rglegalsolutions.in/rglegalsolutions.webp",
-              image: "https://www.rglegalsolutions.in/rglegalsolutions.webp",
+              logo: "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
+              image: "https://www.rglegalsolutions.in/RGlogowithoutbg.webp",
               description: "Leading law firm in Jaipur offering expert legal services across civil, criminal, and corporate law. Professional legal consultation, litigation, documentation, and research services.",
               address: {
                 "@type": "PostalAddress",

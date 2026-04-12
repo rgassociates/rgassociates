@@ -1,63 +1,42 @@
 'use client';
-
+ 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ImageUpload from '@/components/admin/ImageUpload';
 import React from 'react';
+ 
+export interface Attorney {
+    id: string;
+    name: string;
+    role: string;
+    specialization: string;
+    bio?: string;
+    image_url?: string;
+    display_order?: number;
+}
 
-export default function EditAttorneyPage({ params }: { params: Promise<{ id: string }> }) {
-    // Unwrap params using React.use() or await in useEffect (since it's a client component, I need to unwrap it)
-    // Actually, in Next.js 15+ client components, params is a promise.
-    const resolvedParams = React.use(params);
-    const id = resolvedParams.id;
-
+export default function EditAttorneyForm({ attorney: initialData }: { attorney: Attorney }) {
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState('');
-
+ 
     // Form State
-    const [name, setName] = useState('');
-    const [role, setRole] = useState('');
-    const [specialization, setSpecialization] = useState('');
-    const [bio, setBio] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
-    const [displayOrder, setDisplayOrder] = useState(100);
-
-    useEffect(() => {
-        fetchAttorney();
-    }, [id]);
-
-    const fetchAttorney = async () => {
-        try {
-            const response = await fetch(`/api/admin/attorneys/${id}`);
-            const data = await response.json();
-
-            if (response.ok) {
-                const { attorney } = data;
-                setName(attorney.name);
-                setRole(attorney.role);
-                setSpecialization(attorney.specialization);
-                setBio(attorney.bio || '');
-                setImageUrl(attorney.image_url || '');
-                setDisplayOrder(attorney.display_order ?? 100);
-            } else {
-                setError('Failed to fetch data');
-            }
-        } catch (err) {
-            console.error(err);
-            setError('Error fetching data');
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    const [name, setName] = useState(initialData.name);
+    const [role, setRole] = useState(initialData.role);
+    const [specialization, setSpecialization] = useState(initialData.specialization);
+    const [bio, setBio] = useState(initialData.bio || '');
+    const [imageUrl, setImageUrl] = useState(initialData.image_url || '');
+    const [displayOrder, setDisplayOrder] = useState(initialData.display_order ?? 100);
+ 
+    const id = initialData.id;
+ 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSaving(true);
         setError('');
-
+ 
         try {
             const response = await fetch(`/api/admin/attorneys/${id}`, {
                 method: 'PUT',
@@ -71,9 +50,9 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                     display_order: displayOrder
                 }),
             });
-
+ 
             const data = await response.json();
-
+ 
             if (response.ok) {
                 router.push('/admin/attorneys');
                 router.refresh();
@@ -87,25 +66,25 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
             setSaving(false);
         }
     };
-
+ 
     if (loading) {
-        return <div className="p-8 text-center">Loading...</div>;
+        return <div className="p-8 text-center text-gray-500">Loading attorney profile...</div>;
     }
-
+ 
     return (
         <div className="max-w-4xl mx-auto py-8">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                     <Link
                         href="/admin/attorneys"
-                        className="p-2 rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
+                        className="p-2 rounded-full hover:bg-gray-100 text-gray-400 transition-colors"
                     >
                         ⬅️
                     </Link>
-                    <h1 className="text-2xl font-bold text-gray-900">Edit Attorney</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">Edit Attorney Profile</h1>
                 </div>
             </div>
-
+ 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Error Message */}
@@ -114,7 +93,7 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                             {error}
                         </div>
                     )}
-
+ 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Left Column: Details */}
                         <div className="space-y-6">
@@ -128,7 +107,7 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646]/50 focus:border-[#D4A646]"
                                 />
                             </div>
-
+ 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Role / Title *</label>
                                 <input
@@ -139,7 +118,7 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646]/50 focus:border-[#D4A646]"
                                 />
                             </div>
-
+ 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Specialization *</label>
                                 <input
@@ -150,7 +129,7 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646]/50 focus:border-[#D4A646]"
                                 />
                             </div>
-
+ 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Display Order</label>
                                 <input
@@ -163,11 +142,11 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                                 <p className="text-xs text-gray-500 mt-1">Lower numbers appear first. Default is 100.</p>
                             </div>
                         </div>
-
+ 
                         {/* Right Column: Image */}
                         <div className="space-y-6">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Profile Photo</label>
-
+ 
                             {/* Preview */}
                             <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300 relative group">
                                 {imageUrl ? (
@@ -183,18 +162,18 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                                     </div>
                                 )}
                             </div>
-
+ 
                             <ImageUpload
                                 bucket="attorneys"
-                                label="Change Image"
+                                label="Update Profile Photo"
                                 onUploadComplete={(url) => setImageUrl(url)}
                             />
                         </div>
                     </div>
-
+ 
                     {/* Bio - Full Width */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Biography</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Biography / Professional Summary</label>
                         <textarea
                             rows={5}
                             value={bio}
@@ -202,7 +181,7 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4A646]/50 focus:border-[#D4A646]"
                         />
                     </div>
-
+ 
                     {/* Actions */}
                     <div className="flex items-center justify-end gap-4 pt-4 border-t border-gray-100">
                         <Link
@@ -214,7 +193,7 @@ export default function EditAttorneyPage({ params }: { params: Promise<{ id: str
                         <button
                             type="submit"
                             disabled={saving}
-                            className="px-8 py-2 bg-[#D4A646] text-white rounded-lg hover:bg-[#C8A34E] shadow-lg shadow-[#D4A646]/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            className="px-8 py-2 bg-[#D4A646] text-white rounded-lg hover:bg-[#C8A34E] shadow-lg shadow-[#D4A646]/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
                         >
                             {saving ? 'Saving...' : 'Save Changes'}
                         </button>

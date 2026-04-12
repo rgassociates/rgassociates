@@ -130,6 +130,7 @@ export default function AttorneysPage() {
                                                             src={person.image_url}
                                                             alt={person.name}
                                                             fill
+                                                            sizes="40px"
                                                             className="object-cover"
                                                         />
                                                     ) : (

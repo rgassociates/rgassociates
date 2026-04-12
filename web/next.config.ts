@@ -6,18 +6,18 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'placehold.co',
-      },
-      {
-        protocol: 'https',
-        hostname: 'uyivgoqsoxravziyabqq.supabase.co',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: '*.supabase.co',
+        pathname: '/storage/v1/object/public/**',
       }
     ],
   },
