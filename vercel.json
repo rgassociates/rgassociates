@@ -1,16 +1,5 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "web/package.json",
-            "use": "@vercel/next"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/web/$1"
-        }
-    ],
-    "outputDirectory": "web/.next"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd web && npm ci",
+  "buildCommand": "cd web && npm run build"
 }
